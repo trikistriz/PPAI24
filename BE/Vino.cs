@@ -11,9 +11,9 @@ namespace PPAI24.BE
 		private string _nombre;
 		private string _notaDeCataBodega;
 		private float _precioARS;
-		private string _aniada;
+		private int _aniada;
 
-		public Vino(string nombre, string notaDeCataBodega, float precioARS, string aniada)
+		public Vino(string nombre, string notaDeCataBodega, float precioARS, int aniada)
 		{
 			_nombre = nombre;
 			_notaDeCataBodega = notaDeCataBodega;
@@ -21,7 +21,7 @@ namespace PPAI24.BE
 			_aniada = aniada;
 		}
 
-		public string aniada
+		public int aniada
 		{
 			get { return _aniada; }
 			set { _aniada = value; }
