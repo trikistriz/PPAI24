@@ -18,6 +18,11 @@ namespace PPAI24
 
         }
 
+        public static DateTime fechaReseniaDesde;
+        public static DateTime fechaReseniaHasta;
+        public static String tipoResenia; 
+
+
         private void btnSelRangoFechas_Click(object sender, EventArgs e)
         {
             DateTime fecha_desde = dtpDesde.Value;
@@ -33,16 +38,35 @@ namespace PPAI24
                 pnlTipoResenia.Visible = true;
                 pnlExportRanking.Visible = false;
 
+                fechaReseniaDesde = fecha_desde;
+                fechaReseniaHasta = fecha_hasta;
+
             }
         }
 
         private void btnSelResenia_Click(object sender, EventArgs e)
         {
-            if(rbReseniaNormal.Checked || rbReseniaSommelier.Checked || rbReseniaAmigos.Checked)
+            if (rbReseniaNormal.Checked || rbReseniaSommelier.Checked || rbReseniaAmigos.Checked)
             {
                 pnlRangoFecha.Visible = false;
                 pnlTipoResenia.Visible = false;
                 pnlExportRanking.Visible = true;
+
+                if (rbReseniaNormal.Checked)
+                {
+                    tipoResenia = "N";
+                }
+                else
+                {
+                    if (rbReseniaAmigos.Checked)
+                    {
+                        tipoResenia = "A";
+                    }
+                    else
+                    {
+                        tipoResenia = "S";
+                    }
+                }
             }
             else
             {
@@ -51,8 +75,37 @@ namespace PPAI24
             }
         }
 
+        
 
+        private void bntSelExportRanking_Click(object sender, EventArgs e)
+        {
+            if(rbExportExcel.Checked || rbExportPDF.Checked || rbExportGrid.Checked)
+            {
+                MessageBox.Show("Confirma la generación del reporte?");
 
+                if (rbExportExcel.Checked)
+                {
+                    //exportExcel
+                }
+                else
+                {
+                    if (rbExportPDF.Checked)
+                    {
+                        //exportPDF
+                    }
+                    else
+                    {
+                        //exportGrid
+                        RankingExportGrid rankingExportGrid = new RankingExportGrid();
+                        rankingExportGrid.Show();
 
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un formato para mostrar Ranking");
+            }
+        } 
     }
 }

@@ -8,16 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using PPAI24.BE;
 
 namespace PPAI24
 {
     public partial class Default : Form
     {
-        public Default()
+        public Default(Usuario usuario)
         {
             InitializeComponent();
         }
 
+        //para poder desplazar desde panel superior
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
@@ -28,6 +30,7 @@ namespace PPAI24
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+        //--------------------------------------------------------------------------------------------
 
         private void btnDefaultMenu_Click(object sender, EventArgs e)
         {
