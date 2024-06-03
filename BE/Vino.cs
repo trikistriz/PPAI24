@@ -8,10 +8,15 @@ namespace PPAI24.BE
 {
     public class Vino
     {
+		private int id { get; set; }
+		private Bodega _bodega { get; set; }
+		private Varietal _varietal { get; set; }
 		private string _nombre;
 		private string _notaDeCataBodega;
 		private float _precioARS;
 		private int _aniada;
+		private List<Reseña> _reseña {  get; set; }
+		private List<Maridaje> _maridaje { get; set; }
 
 		public Vino(string nombre, string notaDeCataBodega, float precioARS, int aniada)
 		{
@@ -21,7 +26,8 @@ namespace PPAI24.BE
 			_aniada = aniada;
 		}
 
-		public int aniada
+        #region Getters and Setters
+        public int aniada
 		{
 			get { return _aniada; }
 			set { _aniada = value; }
@@ -44,7 +50,7 @@ namespace PPAI24.BE
 			get { return _nombre; }
 			set { _nombre = value; }
 		}
+        #endregion
 
-
-	}
+    }
 }

@@ -19,7 +19,9 @@ namespace PPAI24.BE
 			_constrasenia = password;
 			_premium = premium;
 		}
-		public string nombre
+
+        #region Getters and Setters
+        public string nombre
 		{
 			get { return _nombre; }
 			set { _nombre = value; }
@@ -35,7 +37,7 @@ namespace PPAI24.BE
 			get { return _premium; }
 			set { _premium = value; }
 		}
-
+		#endregion
 
 	}
 }
