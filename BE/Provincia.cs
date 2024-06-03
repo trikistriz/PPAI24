@@ -9,7 +9,6 @@ namespace PPAI24.BE
 {
     public class Provincia
     {
-        //atributos
         private string Nombre { get; set; }
         private List<RegionVinicola> Regiones { get; set; }
 

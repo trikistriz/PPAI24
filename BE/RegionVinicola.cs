@@ -26,12 +26,12 @@ namespace PPAI24.BE
         #endregion
 
         //traer info de la bd
-        //public string GetPais()
-        //{
+        public string GetPais()
+        {
         //    ProvinciaData pd = new ProvinciaData();
         //    Provincia p = pd.GetProvinciaByRegion(Nombre);
         //    return p.GetPais();
-        //}
+        }
 
 
     }
