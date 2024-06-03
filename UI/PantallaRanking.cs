@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPAI24.BE;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,16 +12,16 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PPAI24
 {
-    public partial class RankingVinos : Form
+    public partial class PantallaRanking : Form
     {
-        public RankingVinos()
+        public PantallaRanking()
         {
             InitializeComponent();
 
         }
 
-        public static DateTime fechaReseniaDesde;
-        public static DateTime fechaReseniaHasta;
+        public DateTime fechaReseniaDesde;
+        public DateTime fechaReseniaHasta;
         public static String tipoResenia; 
 
 
@@ -76,56 +77,20 @@ namespace PPAI24
             }
         }
 
-        public class Vino
-        {
-            public int Posicion { get; set; }
-            public string Nombre { get; set; }
-            public double CalificacionSommelier { get; set; }
-            public double CalificacionGeneral { get; set; }
-            public decimal PrecioSugerido { get; set; }
-            public string Bodega { get; set; }
-            public string Varietal { get; set; }
-            public string Region { get; set; }
-            public string Pais { get; set; }
-        }
+        //public class Vino
+        //{
+        //    public int Posicion { get; set; }
+        //    public string Nombre { get; set; }
+        //    public double CalificacionSommelier { get; set; }
+        //    public double CalificacionGeneral { get; set; }
+        //    public decimal PrecioSugerido { get; set; }
+        //    public string Bodega { get; set; }
+        //    public string Varietal { get; set; }
+        //    public string Region { get; set; }
+        //    public string Pais { get; set; }
+        //}
 
-        private List<Vino> GenerarRanking()
-        {
-            var listaVinos = new List<Vino>();
-            var listVinos = new List<object[]>
-            {
-                new object[] { "1","Almaviva", "4.50", "4.80", "150.00", "Viña Almaviva", "Cabernet Sauvignon, Carménère", "Valle de Maipo", "Chile" },
-                new object[] { "2","Catena Zapata Nicolás Catena Zapata", "4.70", "4.50", "100.00", "Bodega Catena Zapata", "Cabernet Sauvignon, Malbec", "Mendoza", "Argentina" },
-                new object[] { "3","Viña Cobos Bramare Malbec Marchiori Vineyard", "4.70", "4.80", "80.00", "Viña Cobos", "Malbec", "Mendoza", "Argentina" },
-                new object[] { "4","Lapostolle Clos Apalta", "4.60", "4.70", "120.00", "Viña Lapostolle", "Carmenère, Cabernet Sauvignon, Merlot", "Valle de Colchagua", "Chile" },
-                new object[] { "5","Bodega Garzón Single Vineyard Petit Verdot", "4.50", "4.60", "60.00", "Bodega Garzón", "Petit Verdot", "Maldonado", "Uruguay" },
-                new object[] { "6","Viña Ventisquero Grey Carmenere", "4.50", "4.60", "30.00", "Viña Ventisquero", "Carmenère", "Valle del Maipo", "Chile" },
-                new object[] { "7","Terrazas de los Andes Single Vineyard Las Compuertas Malbec", "4.40", "4.50", "50.00", "Terrazas de los Andes", "Malbec", "Mendoza", "Argentina" },
-                new object[] { "8","Casa Silva Microterroir de los Lingues Carmenere", "4.40", "4.50", "40.00", "Casa Silva", "Carmenère", "Valle de Colchagua", "Chile" },
-                new object[] { "9","Zuccardi Aluvional Paraje Altamira Malbec", "4.30", "4.40", "70.00", "Zuccardi", "Malbec", "Valle de Uco", "Argentina" },
-                new object[] { "10","Concha y Toro Don Melchor", "4.30", "4.40", "80.00", "Viña Concha y Toro", "Cabernet Sauvignon", "Puente Alto", "Chile" }
-            };
-
-            foreach (var item in listVinos)
-            {
-                Vino vino = new Vino
-                {
-                    Posicion = int.Parse(item[0].ToString()),
-                    Nombre = item[1].ToString(),
-                    CalificacionSommelier = double.Parse(item[2].ToString()),
-                    CalificacionGeneral = double.Parse(item[3].ToString()),
-                    PrecioSugerido = decimal.Parse(item[4].ToString()),
-                    Bodega = item[5].ToString(),
-                    Varietal = item[6].ToString(),
-                    Region = item[7].ToString(),
-                    Pais = item[8].ToString()
-                };
-
-                listaVinos.Add(vino);
-            }
-
-            return listaVinos;
-        }
+        
         
 
         private void bntSelExportRanking_Click(object sender, EventArgs e)

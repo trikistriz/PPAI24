@@ -68,7 +68,7 @@ namespace PPAI24
 
         private void btnRanking_Click(object sender, EventArgs e)
         {
-            OpenRankingVinosInDefault(new RankingVinos());
+            OpenRankingVinosInDefault(new PantallaRanking());
         }
     }
 }

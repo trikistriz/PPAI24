@@ -14,6 +14,17 @@ namespace PPAI24.BE
             Nombre = "";
         }
 
+        private List<String> _nombresDeRegion = new List<string>
+        {
+            "Valle de Maipo",
+            "Mendoza",
+            "Valle de Colchagua",
+            "Maldonado",
+            "Valle del Maipo",
+            "Valle de Uco",
+            "Puente Alto"
+        };
+
         #region Getters and Setters
         public string GetNombre()
         {
@@ -25,14 +36,19 @@ namespace PPAI24.BE
         }
         #endregion
 
-        //traer info de la bd
-        public string GetPais()
+        public string ObtenerNombrePais()
         {
-        //    ProvinciaData pd = new ProvinciaData();
-        //    Provincia p = pd.GetProvinciaByRegion(Nombre);
-        //    return p.GetPais();
+            Provincia provincia = new Provincia();
+            string pais = provincia.ObtenerNombrePais();
+            return pais;
         }
 
+        public string ObtenerNombreRegion()
+        {
+            Random random = new Random();
+            string nb = _nombresDeRegion[random.Next(_nombresDeRegion.Count)];
 
+            return nb;
+        }
     }
 }

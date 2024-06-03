@@ -1,6 +1,6 @@
 ﻿namespace PPAI24
 {
-    partial class RankingVinos
+    partial class PantallaRanking
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RankingVinos));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaRanking));
             lblTitleRankingVinos = new Label();
             lblRankingInfo = new Label();
             textBox1 = new TextBox();

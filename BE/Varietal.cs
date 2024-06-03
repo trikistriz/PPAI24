@@ -12,11 +12,22 @@ namespace PPAI24.BE
         private int PorcentajeComposicion { get; set; }
         private TipoUva TipoUva { get; set; }
 
-        #region Getters and Setters
-        
-        public void SetNombre(string nombre)
+        private List<String> _nombresDeVarietal = new List<String>
         {
-            Descripcion = nombre;
+            "Cabernet Sauvignon, Carménère",
+            "Cabernet Sauvignon, Malbec",
+            "Malbec",
+            "Carmenère, Cabernet Sauvignon, Merlot",
+            "Petit Verdot",
+            "Carmenère",
+            "Cabernet Sauvignon"
+        };
+
+        #region Getters and Setters
+
+        public void SetDescripcion(string descripcion)
+        {
+            Descripcion = descripcion;
         }
         public string GetDescripcion()
         {
@@ -39,5 +50,12 @@ namespace PPAI24.BE
             TipoUva = tipoUva;
         }
         #endregion
+        public string obtenerNombreVarietal()
+        {
+            Random random = new Random();
+            string nb = _nombresDeVarietal[random.Next(_nombresDeVarietal.Count)];
+
+            return nb;
+        }
     }
 }
