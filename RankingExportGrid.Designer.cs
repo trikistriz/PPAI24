@@ -30,6 +30,7 @@
         {
             pnlRankingExportGridMove = new Panel();
             dgvRankingVinos = new DataGridView();
+            rank = new DataGridViewTextBoxColumn();
             nombre = new DataGridViewTextBoxColumn();
             calificacion_sommelier = new DataGridViewTextBoxColumn();
             calificacion_general = new DataGridViewTextBoxColumn();
@@ -45,8 +46,9 @@
             // 
             pnlRankingExportGridMove.Dock = DockStyle.Top;
             pnlRankingExportGridMove.Location = new Point(0, 0);
+            pnlRankingExportGridMove.Margin = new Padding(0);
             pnlRankingExportGridMove.Name = "pnlRankingExportGridMove";
-            pnlRankingExportGridMove.Size = new Size(1620, 51);
+            pnlRankingExportGridMove.Size = new Size(1620, 30);
             pnlRankingExportGridMove.TabIndex = 4;
             pnlRankingExportGridMove.MouseDown += pnlRankingExportGridMove_MouseDown;
             // 
@@ -54,25 +56,44 @@
             // 
             dgvRankingVinos.AllowUserToAddRows = false;
             dgvRankingVinos.AllowUserToDeleteRows = false;
-            dgvRankingVinos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvRankingVinos.BackgroundColor = SystemColors.Control;
             dgvRankingVinos.BorderStyle = BorderStyle.None;
             dgvRankingVinos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRankingVinos.Columns.AddRange(new DataGridViewColumn[] { nombre, calificacion_sommelier, calificacion_general, precio_sugerido, bodega, varietal, region, pais });
-            dgvRankingVinos.Dock = DockStyle.Fill;
-            dgvRankingVinos.Location = new Point(0, 51);
-            dgvRankingVinos.Margin = new Padding(3, 4, 3, 4);
+            dgvRankingVinos.Columns.AddRange(new DataGridViewColumn[] { rank, nombre, calificacion_sommelier, calificacion_general, precio_sugerido, bodega, varietal, region, pais });
+            dgvRankingVinos.Location = new Point(43, 84);
+            dgvRankingVinos.Margin = new Padding(0);
             dgvRankingVinos.Name = "dgvRankingVinos";
             dgvRankingVinos.ReadOnly = true;
-            dgvRankingVinos.RowHeadersWidth = 51;
-            dgvRankingVinos.Size = new Size(1620, 449);
+            dgvRankingVinos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvRankingVinos.RowHeadersVisible = false;
+            dgvRankingVinos.RowHeadersWidth = 50;
+            dgvRankingVinos.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgvRankingVinos.RowTemplate.ReadOnly = true;
+            dgvRankingVinos.RowTemplate.Resizable = DataGridViewTriState.False;
+            dgvRankingVinos.ScrollBars = ScrollBars.None;
+            dgvRankingVinos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRankingVinos.Size = new Size(1534, 333);
             dgvRankingVinos.TabIndex = 5;
+            // 
+            // rank
+            // 
+            rank.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            rank.Frozen = true;
+            rank.HeaderText = "Posición";
+            rank.MinimumWidth = 6;
+            rank.Name = "rank";
+            rank.ReadOnly = true;
+            rank.Width = 125;
             // 
             // nombre
             // 
+            nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            nombre.Frozen = true;
             nombre.HeaderText = "Nombre";
             nombre.MinimumWidth = 6;
             nombre.Name = "nombre";
             nombre.ReadOnly = true;
+            nombre.Width = 200;
             // 
             // calificacion_sommelier
             // 
@@ -80,6 +101,7 @@
             calificacion_sommelier.MinimumWidth = 6;
             calificacion_sommelier.Name = "calificacion_sommelier";
             calificacion_sommelier.ReadOnly = true;
+            calificacion_sommelier.Width = 182;
             // 
             // calificacion_general
             // 
@@ -87,6 +109,7 @@
             calificacion_general.MinimumWidth = 6;
             calificacion_general.Name = "calificacion_general";
             calificacion_general.ReadOnly = true;
+            calificacion_general.Width = 182;
             // 
             // precio_sugerido
             // 
@@ -94,6 +117,7 @@
             precio_sugerido.MinimumWidth = 6;
             precio_sugerido.Name = "precio_sugerido";
             precio_sugerido.ReadOnly = true;
+            precio_sugerido.Width = 182;
             // 
             // bodega
             // 
@@ -101,6 +125,7 @@
             bodega.MinimumWidth = 6;
             bodega.Name = "bodega";
             bodega.ReadOnly = true;
+            bodega.Width = 182;
             // 
             // varietal
             // 
@@ -108,6 +133,7 @@
             varietal.MinimumWidth = 6;
             varietal.Name = "varietal";
             varietal.ReadOnly = true;
+            varietal.Width = 182;
             // 
             // region
             // 
@@ -115,6 +141,7 @@
             region.MinimumWidth = 6;
             region.Name = "region";
             region.ReadOnly = true;
+            region.Width = 182;
             // 
             // pais
             // 
@@ -122,12 +149,13 @@
             pais.MinimumWidth = 6;
             pais.Name = "pais";
             pais.ReadOnly = true;
+            pais.Width = 182;
             // 
             // RankingExportGrid
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1620, 500);
+            ClientSize = new Size(1620, 525);
             Controls.Add(dgvRankingVinos);
             Controls.Add(pnlRankingExportGridMove);
             FormBorderStyle = FormBorderStyle.None;
@@ -143,6 +171,7 @@
 
         private Panel pnlRankingExportGridMove;
         private DataGridView dgvRankingVinos;
+        private DataGridViewTextBoxColumn rank;
         private DataGridViewTextBoxColumn nombre;
         private DataGridViewTextBoxColumn calificacion_sommelier;
         private DataGridViewTextBoxColumn calificacion_general;
