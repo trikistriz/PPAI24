@@ -13,31 +13,42 @@ namespace PPAI24
         private DateTime _fechaReseñaDesde;
         private DateTime _fechaReseñaHasta;
         private bool _tipoReseña;
-        private List<Vino> Vinos;
+        private List<Vino> _vinos;
+
+        private void crearVinos()
+        {
+            for (int i = 0; i < 11; i++)
+            {
+                Vino vino = new Vino();
+                vino.obtenerNombreVino();
+                vino.obtenerPrecio();
+                vino.obtenerNombreVarietal();
+
+                //String[] infoBodega = vino.buscarInfoBodega();
+
+                _vinos.Add(vino);
+            }
+        }
 
         public DataTable GenerarRankingVinos(bool tipoReseña, DateTime fechaReseñaDesde, DateTime fechaReseñaHasta)
         {
             _tipoReseña = tipoReseña;
             _fechaReseñaDesde = fechaReseñaDesde;
             _fechaReseñaHasta = fechaReseñaHasta;
+            
             DataTable ranking = calcularPuntajeDeSommelierEnPeriodo();
             ranking = ordenarVinos(ranking);
             DataTable listaVinos = buscarDatosVinos(ranking);
             return listaVinos;
         }
 
-        private void GenerarVinos(List<object> vinos)
-        {
-
-        }
         private DataTable calcularPuntajeDeSommelierEnPeriodo()
         {
-            //Vinos = source
             DataTable ranking = new DataTable();
             ranking.Columns.Add("Vino");
             ranking.Columns.Add("Promedio");
 
-            foreach (Vino vino in Vinos)
+            foreach (Vino vino in _vinos)
             {
                 // Valido las reseñas
                 float promedio = vino.calcularPuntajeDeSommelierEnPeriodo(_tipoReseña, _fechaReseñaDesde, _fechaReseñaHasta);
@@ -88,6 +99,15 @@ namespace PPAI24
         {
             dt.DefaultView.Sort = "Promedio DESC";
             return dt.DefaultView.ToTable();
-        }  
+        }
+
+        public bool validarFechasDeReseñas(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            DateTime fechaActual = DateTime.Now;
+            if (fechaDesde > fechaHasta)
+                return false;
+            else
+                return true;
+        }
     }
 }

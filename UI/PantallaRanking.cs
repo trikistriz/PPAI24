@@ -17,32 +17,26 @@ namespace PPAI24
         public PantallaRanking()
         {
             InitializeComponent();
-
         }
 
-        public DateTime fechaReseñaDesde;
-        public DateTime fechaReseñaHasta;
-        public bool tipoReseña; 
-
+        DateTime fechaDesde;
+        DateTime fechaHasta;
+        public bool tipoReseña;
+        ControladorGenerarRanking controlador = new ControladorGenerarRanking();
 
         private void btnSelRangoFechas_Click(object sender, EventArgs e)
         {
-            DateTime fecha_desde = dtpDesde.Value;
-            DateTime fecha_hasta = dtpHasta.Value;
+            fechaDesde = dtpDesde.Value;
+            fechaHasta = dtpHasta.Value;
+            bool fechaValida = controlador.validarFechasDeReseñas(fechaDesde, fechaHasta);
 
-            if (fecha_desde > fecha_hasta)
-            {
-                MessageBox.Show("El rango de fecha ingresado no es valido");
-            }
+            if (!fechaValida)
+                MessageBox.Show("El rango de fechas ingresado no es valido");
             else
             {
+                pnlExportRanking.Visible = false;
                 pnlRangoFecha.Visible = false;
                 pnlTipoResenia.Visible = true;
-                pnlExportRanking.Visible = false;
-
-                fechaReseñaDesde = fecha_desde;
-                fechaReseñaHasta = fecha_hasta;
-
             }
         }
 
@@ -55,43 +49,17 @@ namespace PPAI24
                 pnlExportRanking.Visible = true;
 
                 if (rbReseniaNormal.Checked || rbReseniaAmigos.Checked)
-                {
                     tipoReseña = false;
-                }
+
                 else
-                {
-                        
                     tipoReseña = true;
-                    
-                }
             }
             else
-            {
                 MessageBox.Show("Debe seleccionar un tipo de reseña");
-
-            }
         }
-
-        //public class Vino
-        //{
-        //    public int Posicion { get; set; }
-        //    public string Nombre { get; set; }
-        //    public double CalificacionSommelier { get; set; }
-        //    public double CalificacionGeneral { get; set; }
-        //    public decimal PrecioSugerido { get; set; }
-        //    public string Bodega { get; set; }
-        //    public string Varietal { get; set; }
-        //    public string Region { get; set; }
-        //    public string Pais { get; set; }
-        //}
-
-        
-        
 
         private void bntSelExportRanking_Click(object sender, EventArgs e)
         {
-            ControladorGenerarRanking controlador_generar_ranking = new ControladorGenerarRanking();
-
             if (rbExportExcel.Checked || rbExportPDF.Checked || rbExportGrid.Checked)
             {
                 MessageBox.Show("Confirma la generación del reporte?");
@@ -148,7 +116,7 @@ namespace PPAI24
                         //List<object> list = new List<object>();
                         //RankingExportGrid rankingExportGrid = new RankingExportGrid(list);
                         //rankingExportGrid.Show();
-                        DataTable ranking = controlador_generar_ranking.GenerarRankingVinos(tipoReseña, fechaReseñaDesde, fechaReseñaHasta);
+                        DataTable ranking = controlador.GenerarRankingVinos(tipoReseña, fechaDesde, fechaHasta);
                         RankingExportGrid rankingExportGrid = new RankingExportGrid(ranking);
                         rankingExportGrid.Show();
                         //dataGridRanking.Visible = true;
@@ -161,6 +129,6 @@ namespace PPAI24
             {
                 MessageBox.Show("Debe seleccionar un formato para mostrar Ranking");
             }
-        } 
+        }
     }
 }

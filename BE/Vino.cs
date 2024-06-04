@@ -11,11 +11,12 @@ namespace PPAI24.BE
         private int id { get; set; }
         private Bodega _bodega { get; set; }
         private Varietal _varietal { get; set; }
+        private List<Reseña> _reseña { get; set; }
         private string _nombre;
         private string _notaDeCataBodega;
         private float _precioARS;
         private int _añada;
-        private List<Reseña> _reseña { get; set; }
+        
 
         //hardcodeada cosmica
         private List<String> _nombresDeVinos = new List<string>
@@ -65,7 +66,13 @@ namespace PPAI24.BE
             _precioARS = precioARS;
             _añada = añada;
         }
-        public Vino() { }
+        public Vino() 
+        {
+            _nombre = "";
+            _notaDeCataBodega = "";
+            _precioARS = 0;
+            _añada = 0;
+        }
 
         public float calcularPuntajeDeSommelierEnPeriodo(bool premium, DateTime fechaDesde, DateTime fechaHasta)
         {
@@ -110,8 +117,8 @@ namespace PPAI24.BE
             String[] bodega = new string[3];
             String[] regionYPais = _bodega.ObtenerRegionYPais();
             bodega[0] = _bodega.ObtenerNombreBodega();
-            bodega[1] = regionYPais[0];
-            bodega[2] = regionYPais[1];
+            bodega[1] = regionYPais[0]; //region
+            bodega[2] = regionYPais[1]; //pais
 
             return bodega;
         }
