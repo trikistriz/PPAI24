@@ -13,29 +13,29 @@ namespace PPAI24
         private DateTime _fechaReseñaDesde;
         private DateTime _fechaReseñaHasta;
         private bool _tipoReseña;
-        private List<Vino> _vinos;
+        private List<Vino> _vinos = new List<Vino>();
+        private DataTable _dtRanking= new DataTable();
 
         private void crearVinos()
         {
             for (int i = 0; i < 11; i++)
             {
                 Vino vino = new Vino();
-                vino.obtenerNombreVino();
-                vino.obtenerPrecio();
-                vino.obtenerNombreVarietal();
-
-                //String[] infoBodega = vino.buscarInfoBodega();
-
+                Reseña reseña = new Reseña();
+                vino.AddReseña(reseña);
                 _vinos.Add(vino);
+
             }
         }
+
+
 
         public DataTable GenerarRankingVinos(bool tipoReseña, DateTime fechaReseñaDesde, DateTime fechaReseñaHasta)
         {
             _tipoReseña = tipoReseña;
             _fechaReseñaDesde = fechaReseñaDesde;
             _fechaReseñaHasta = fechaReseñaHasta;
-            
+            crearVinos();
             DataTable ranking = calcularPuntajeDeSommelierEnPeriodo();
             ranking = ordenarVinos(ranking);
             DataTable listaVinos = buscarDatosVinos(ranking);
@@ -50,11 +50,10 @@ namespace PPAI24
 
             foreach (Vino vino in _vinos)
             {
-                // Valido las reseñas
                 float promedio = vino.calcularPuntajeDeSommelierEnPeriodo(_tipoReseña, _fechaReseñaDesde, _fechaReseñaHasta);
 
                 DataRow row = ranking.NewRow();
-                row["Vino"] = vino.nombre;
+                row["Vino"] = vino.GetNombre();
                 row["Promedio"] = promedio;
                 ranking.Rows.Add(row);
             }
@@ -63,36 +62,32 @@ namespace PPAI24
         }
         private DataTable buscarDatosVinos(DataTable dt)
         {
-            DataTable dtVinos = new DataTable();
-            dtVinos.Columns.Add("Vino");
-            dtVinos.Columns.Add("Promedio");
-            dtVinos.Columns.Add("Precio");
-            dtVinos.Columns.Add("Bodega");
-            dtVinos.Columns.Add("Varietal");
-            dtVinos.Columns.Add("Region");
-            dtVinos.Columns.Add("Pais");
+            if (!_dtRanking.Columns.Contains("nombre")) _dtRanking.Columns.Add("nombre");
+            if (!_dtRanking.Columns.Contains("calificacion_sommelier")) _dtRanking.Columns.Add("calificacion_sommelier");
+            if (!_dtRanking.Columns.Contains("precio_sugerido")) _dtRanking.Columns.Add("precio_sugerido");
+            if (!_dtRanking.Columns.Contains("bodega")) _dtRanking.Columns.Add("bodega");
+            if (!_dtRanking.Columns.Contains("varietal")) _dtRanking.Columns.Add("varietal");
+            if (!_dtRanking.Columns.Contains("region")) _dtRanking.Columns.Add("region");
+            if (!_dtRanking.Columns.Contains("pais")) _dtRanking.Columns.Add("pais");
 
-            // Buscamos los datos de los 10 primeros vinos
-            for (int i = 0; i < 10; i++)
+            foreach (Vino vino in _vinos)
             {
-                Vino vino = new Vino();
-                DataRow row = dt.Rows[i];
+                DataRow foundRow = dt.AsEnumerable().FirstOrDefault(row => row["Vino"].ToString() == vino.GetNombre());
 
-                DataRow newRow = dtVinos.NewRow();
-                newRow["Vino"] = vino.obtenerNombreVino();
-                newRow["Promedio"] = row["Promedio"];
-                newRow["Precio"] = vino.obtenerPrecio();
-
+                DataRow newRow = _dtRanking.NewRow();
+                newRow["nombre"] = vino.GetNombre();
+                newRow["calificacion_sommelier"] = foundRow["Promedio"];
+                newRow["precio_sugerido"] = vino.GetPrecio();
                 String[] infoBodega = vino.buscarInfoBodega();
-                newRow["Bodega"] = infoBodega[0];
-                newRow["Region"] = infoBodega[1];
-                newRow["Pais"] = infoBodega[2];
+                newRow["bodega"] = infoBodega[0];
+                newRow["varietal"] = vino.obtenerNombreVarietal();
+                newRow["region"] = infoBodega[1];
+                newRow["pais"] = infoBodega[2];
+                
 
-                newRow["Varietal"] = vino.obtenerNombreVarietal();
-
-                dtVinos.Rows.Add(newRow);
+                _dtRanking.Rows.Add(newRow);
             }
-            return dtVinos;
+            return _dtRanking;
         }
 
         private DataTable ordenarVinos(DataTable dt)

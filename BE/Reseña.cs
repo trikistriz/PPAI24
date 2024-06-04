@@ -8,7 +8,6 @@ namespace PPAI24.BE
 {
     public class Reseña
     {
-        private int _id { get; set; }
         private string _comentario { get; set; }
         private bool _esPremium { get; set; }
         private DateTime _fechaReseña { get; set; }
@@ -17,9 +16,9 @@ namespace PPAI24.BE
         public Reseña()
         {
             _fechaReseña = DateTime.Now;
-            _puntaje = 0;
+            _puntaje = obtenerPuntajeRandom();
             _comentario = "";
-            _esPremium = false;
+            _esPremium = true;
 
         }
         public Reseña(DateTime fecha, int puntaje, string com, bool premium)
@@ -39,9 +38,19 @@ namespace PPAI24.BE
             return _fechaReseña >= fechaDesde && _fechaReseña <= fechaHasta;
         }
 
+        private int obtenerPuntajeRandom()
+        {
+            Random rnd = new Random();
+            int minValue = 0;
+            int maxValue = 11; 
+
+            int puntaje = rnd.Next(minValue, maxValue);
+            
+            return puntaje;
+        }
+
         #region Getters and Setters
-        public int GetId() { return _id; }
-        public void SetId(int id) { this._id = id; }
+
         public DateTime GetFechaReseña()
         {
             return _fechaReseña;

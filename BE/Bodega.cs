@@ -8,8 +8,8 @@ namespace PPAI24.BE
 {
     public class Bodega
     {
-        private string Nombre { get; set; }
-        private RegionVinicola RegionVinicola { get; set; }
+        private string _nombre { get; set; }
+        private RegionVinicola _regionVinicola { get; set; }
 
         //harcodeada cosmica
         private List<string> _nombresDeBodegas = new List<string>
@@ -31,34 +31,33 @@ namespace PPAI24.BE
         //getters y setters
         public string GetNombre()
         {
-            return Nombre;
+            return _nombre;
         }
         public void SetNombre(string nombre)
         {
-            Nombre = nombre;
+            _nombre = nombre;
         }
         public RegionVinicola GetRegionVinicola()
         {
-            return RegionVinicola;
+            return _regionVinicola;
         }
         public void SetRegionVinicola(RegionVinicola region)
         {
-            RegionVinicola = region;
+            _regionVinicola = region;
         }
         #endregion 
 
         public Bodega()
         {
-            Nombre = "";
-            RegionVinicola = new RegionVinicola();
-
+            _nombre = ObtenerNombreBodega();
+            _regionVinicola = new RegionVinicola();
         }
 
         public String[] ObtenerRegionYPais()
         {
             String[] region = new String[2];
-            region[0] = RegionVinicola.ObtenerNombreRegion();
-            region[1] = RegionVinicola.ObtenerNombrePais();
+            region[0] = _regionVinicola.ObtenerNombreRegion();
+            region[1] = _regionVinicola.ObtenerNombrePais();
 
             return region;
         }

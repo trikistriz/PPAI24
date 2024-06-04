@@ -8,10 +8,9 @@ namespace PPAI24.BE
 {
     public class Vino
     {
-        private int id { get; set; }
         private Bodega _bodega { get; set; }
         private Varietal _varietal { get; set; }
-        private List<Reseña> _reseña { get; set; }
+        private List<Reseña> _reseñas { get; set; }
         private string _nombre;
         private string _notaDeCataBodega;
         private float _precioARS;
@@ -34,44 +33,61 @@ namespace PPAI24.BE
         };
 
         #region Getters and Setters
-        public int añada
+        public string GetNombre()
         {
-            get { return _añada; }
-            set { _añada = value; }
+            return _nombre;
         }
-
-        public float precioARS
+        public void SetNombre(string nombre)
         {
-            get { return _precioARS; }
-            set { _precioARS = value; }
+            _nombre = nombre;
         }
-
-        public string notaDeCataBodega
+        public float GetPrecio()
         {
-            get { return _notaDeCataBodega; }
-            set { _notaDeCataBodega = value; }
+            return _precioARS;
         }
-
-        public string nombre
+        public void SetPrecio(float precio)
         {
-            get { return _nombre; }
-            set { _nombre = value; }
+            _precioARS = precio;
+        }
+        public Bodega GetBodega()
+        {
+            return _bodega;
+
+        }
+        public void SetBodega(Bodega bod)
+        {
+            _bodega = bod;
+        }
+        public string GetVarietal()
+        {
+            return _varietal.GetDescripcion();
+
+        }
+        public void SetVarietal(Varietal v)
+        {
+            _varietal = v;
+        }
+        public List<Reseña> GetReseñas()
+        {
+            return _reseñas;
+        }
+        public void SetReseñas(List<Reseña> l)
+        {
+            _reseñas = l;
+        }
+        public void AddReseña(Reseña res)
+        {
+            _reseñas.Add(res);
         }
         #endregion
 
-        public Vino(string nombre, string notaDeCataBodega, float precioARS, int añada)
-        {
-            _nombre = nombre;
-            _notaDeCataBodega = notaDeCataBodega;
-            _precioARS = precioARS;
-            _añada = añada;
-        }
         public Vino() 
         {
-            _nombre = "";
-            _notaDeCataBodega = "";
-            _precioARS = 0;
-            _añada = 0;
+            _nombre = obtenerNombreVino();
+            _precioARS = obtenerPrecio();
+            _bodega = new Bodega();
+            _varietal = new Varietal();
+            _reseñas = new List<Reseña>();
         }
 
         public float calcularPuntajeDeSommelierEnPeriodo(bool premium, DateTime fechaDesde, DateTime fechaHasta)
@@ -79,7 +95,7 @@ namespace PPAI24.BE
             float suma = 0;
             int count = 0;
 
-            foreach (Reseña reseña in _reseña)
+            foreach (Reseña reseña in _reseñas)
             {
                 if (reseña.sosDePeriodo(fechaDesde, fechaHasta) && reseña.sosDeSommelier() == premium)
                 {
@@ -101,7 +117,9 @@ namespace PPAI24.BE
         public string obtenerNombreVino() 
         {
             Random random = new Random();
-            string nb = _nombresDeVinos[random.Next(_nombresDeVinos.Count)];
+            int index = random.Next(_nombresDeVinos.Count);
+            string nb = _nombresDeVinos[index];
+            _nombresDeVinos.RemoveAt(index);
 
             return nb;
         }
@@ -109,7 +127,9 @@ namespace PPAI24.BE
         public float obtenerPrecio()
         {
             Random random = new Random();
-            float precio = random.Next();
+            int minValue = 2000;
+            int maxValue = 10000;
+            float precio = random.Next(minValue, maxValue);
             return precio;
         }
         public String[] buscarInfoBodega()

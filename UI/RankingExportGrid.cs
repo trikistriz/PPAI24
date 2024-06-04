@@ -17,6 +17,7 @@ namespace PPAI24
         {
             InitializeComponent();
             CargarRanking(ranking);
+            Refresh();
         }
 
         //para poder desplazar desde panel superior
@@ -34,7 +35,7 @@ namespace PPAI24
 
         private void CargarRanking(DataTable ranking)
         {
-            dgvRankingVinos.Rows.Clear();
+            //dgvRankingVinos.Rows.Clear();
             dgvRankingVinos.DataSource = ranking;
         }
     }

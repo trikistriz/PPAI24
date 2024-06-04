@@ -8,9 +8,9 @@ namespace PPAI24.BE
 {
     public class Varietal
     {
-        private string Descripcion { get; set; }
-        private int PorcentajeComposicion { get; set; }
-        private TipoUva TipoUva { get; set; }
+        private string _descripcion { get; set; }
+        private int _porcentajeComposicion { get; set; }
+        private TipoUva _tipoUva { get; set; }
 
         private List<String> _nombresDeVarietal = new List<String>
         {
@@ -22,32 +22,39 @@ namespace PPAI24.BE
             "Carmenère",
             "Cabernet Sauvignon"
         };
+        public Varietal()
+        {
+            _descripcion = obtenerNombreVarietal();
+            _porcentajeComposicion = 0;
+            _tipoUva = new TipoUva();
+
+        }
 
         #region Getters and Setters
 
         public void SetDescripcion(string descripcion)
         {
-            Descripcion = descripcion;
+            _descripcion = descripcion;
         }
         public string GetDescripcion()
         {
-            return Descripcion;
+            return _descripcion;
         }
         public int GetPorcentajeComposicion()
         {
-            return PorcentajeComposicion;
+            return _porcentajeComposicion;
         }
         public void SetPorcentajeComposicion(int porcentaje)
         {
-            PorcentajeComposicion = porcentaje;
+            _porcentajeComposicion = porcentaje;
         }
         public TipoUva GetTipoUva()
         {
-            return TipoUva;
+            return _tipoUva;
         }
         public void SetTipoUva(TipoUva tipoUva)
         {
-            TipoUva = tipoUva;
+            _tipoUva = tipoUva;
         }
         #endregion
         public string obtenerNombreVarietal()

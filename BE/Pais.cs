@@ -9,8 +9,8 @@ namespace PPAI24.BE
     public class Pais
     {
         
-        private string Nombre { get; set; }
-        private List<Provincia> Provincias { get; set; }
+        private string _nombre { get; set; }
+        private List<Provincia> _provincias { get; set; }
         private List<String> _nombresDePaises = new List<String>
         {
             "Chile",
@@ -19,30 +19,30 @@ namespace PPAI24.BE
         };
         public Pais()
         {
-            Nombre = "";
+            _nombre = ObtenerNombrePais();
         }
         public Pais(List<Provincia> provincias)
         {
-            Nombre = "";
-            Provincias = provincias;
+            _nombre = ObtenerNombrePais();
+            _provincias = provincias;
         }
 
         #region Getters and Setters
         public string GetNombre()
         {
-            return Nombre;
+            return _nombre;
         }
         public void SetNombre(string nombre)
         {
-            Nombre = nombre;
+            _nombre = nombre;
         }
         public List<Provincia> GetProvincias()
         {
-            return Provincias;
+            return _provincias;
         }
         public void SetProvincias(List<Provincia> provincias)
         {
-            Provincias = provincias;
+            _provincias = provincias;
         }
         #endregion
 

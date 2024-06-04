@@ -9,35 +9,35 @@ namespace PPAI24.BE
 {
     public class Provincia
     {
-        private string Nombre { get; set; }
-        private List<RegionVinicola> Regiones { get; set; }
+        private string _nombre { get; set; }
+        private List<RegionVinicola> _regiones { get; set; }
 
         public Provincia()
         {
-            Nombre = "";
+            _nombre = "";
         }
         public Provincia(List<RegionVinicola> regiones)
         {
-            Nombre = "";
-            Regiones = regiones;
+            _nombre = "";
+            _regiones = regiones;
         }
 
         #region Getters and Setters
         public string GetNombre()
         {
-            return Nombre;
+            return _nombre;
         }
         public void SetNombre(string nombre)
         {
-            Nombre = nombre;
+            _nombre = nombre;
         }
         public List<RegionVinicola> GetRegiones()
         {
-            return Regiones;
+            return _regiones;
         }
         public void SetRegiones(List<RegionVinicola> regiones)
         {
-            Regiones = regiones;
+            _regiones = regiones;
         }
         #endregion
 

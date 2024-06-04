@@ -8,10 +8,10 @@ namespace PPAI24.BE
 {
     public class RegionVinicola
     {
-        private string Nombre { get; set; }
+        private string _nombre { get; set; }
         public RegionVinicola()
         {
-            Nombre = "";
+            _nombre = ObtenerNombreRegion();
         }
 
         private List<String> _nombresDeRegion = new List<string>
@@ -28,11 +28,11 @@ namespace PPAI24.BE
         #region Getters and Setters
         public string GetNombre()
         {
-            return Nombre;
+            return _nombre;
         }
         public void SetNombre(string nombre)
         {
-            Nombre = nombre;
+            _nombre = nombre;
         }
         #endregion
 
