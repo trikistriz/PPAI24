@@ -15,12 +15,24 @@ namespace PPAI24
         private bool _tipoReseña;
         private List<Vino> Vinos;
 
+        public DataTable GenerarRankingVinos(bool tipoReseña, DateTime fechaReseñaDesde, DateTime fechaReseñaHasta)
+        {
+            _tipoReseña = tipoReseña;
+            _fechaReseñaDesde = fechaReseñaDesde;
+            _fechaReseñaHasta = fechaReseñaHasta;
+            DataTable ranking = calcularPuntajeDeSommelierEnPeriodo();
+            ranking = ordenarVinos(ranking);
+            DataTable listaVinos = buscarDatosVinos(ranking);
+            return listaVinos;
+        }
+
         private void GenerarVinos(List<object> vinos)
         {
 
         }
         private DataTable calcularPuntajeDeSommelierEnPeriodo()
         {
+            //Vinos = source
             DataTable ranking = new DataTable();
             ranking.Columns.Add("Vino");
             ranking.Columns.Add("Promedio");

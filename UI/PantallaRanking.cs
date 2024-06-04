@@ -20,9 +20,9 @@ namespace PPAI24
 
         }
 
-        public DateTime fechaReseniaDesde;
-        public DateTime fechaReseniaHasta;
-        public static String tipoResenia; 
+        public DateTime fechaReseñaDesde;
+        public DateTime fechaReseñaHasta;
+        public bool tipoReseña; 
 
 
         private void btnSelRangoFechas_Click(object sender, EventArgs e)
@@ -40,8 +40,8 @@ namespace PPAI24
                 pnlTipoResenia.Visible = true;
                 pnlExportRanking.Visible = false;
 
-                fechaReseniaDesde = fecha_desde;
-                fechaReseniaHasta = fecha_hasta;
+                fechaReseñaDesde = fecha_desde;
+                fechaReseñaHasta = fecha_hasta;
 
             }
         }
@@ -54,20 +54,15 @@ namespace PPAI24
                 pnlTipoResenia.Visible = false;
                 pnlExportRanking.Visible = true;
 
-                if (rbReseniaNormal.Checked)
+                if (rbReseniaNormal.Checked || rbReseniaAmigos.Checked)
                 {
-                    tipoResenia = "N";
+                    tipoReseña = false;
                 }
                 else
                 {
-                    if (rbReseniaAmigos.Checked)
-                    {
-                        tipoResenia = "A";
-                    }
-                    else
-                    {
-                        tipoResenia = "S";
-                    }
+                        
+                    tipoReseña = true;
+                    
                 }
             }
             else
@@ -95,7 +90,9 @@ namespace PPAI24
 
         private void bntSelExportRanking_Click(object sender, EventArgs e)
         {
-            if(rbExportExcel.Checked || rbExportPDF.Checked || rbExportGrid.Checked)
+            ControladorGenerarRanking controlador_generar_ranking = new ControladorGenerarRanking();
+
+            if (rbExportExcel.Checked || rbExportPDF.Checked || rbExportGrid.Checked)
             {
                 MessageBox.Show("Confirma la generación del reporte?");
 
@@ -148,9 +145,14 @@ namespace PPAI24
                     else
                     {
                         //exportGrid
-                        List<object> list = new List<object>();
-                        RankingExportGrid rankingExportGrid = new RankingExportGrid(list);
+                        //List<object> list = new List<object>();
+                        //RankingExportGrid rankingExportGrid = new RankingExportGrid(list);
+                        //rankingExportGrid.Show();
+                        DataTable ranking = controlador_generar_ranking.GenerarRankingVinos(tipoReseña, fechaReseñaDesde, fechaReseñaHasta);
+                        RankingExportGrid rankingExportGrid = new RankingExportGrid(ranking);
                         rankingExportGrid.Show();
+                        //dataGridRanking.Visible = true;
+                        //dataGridRanking.DataSource = ranking;
 
                     }
                 }
