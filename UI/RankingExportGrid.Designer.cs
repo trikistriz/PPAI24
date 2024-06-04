@@ -30,7 +30,6 @@
         {
             pnlRankingExportGridMove = new Panel();
             dgvRankingVinos = new DataGridView();
-            rank = new DataGridViewTextBoxColumn();
             nombre = new DataGridViewTextBoxColumn();
             calificacion_sommelier = new DataGridViewTextBoxColumn();
             calificacion_general = new DataGridViewTextBoxColumn();
@@ -59,8 +58,8 @@
             dgvRankingVinos.BackgroundColor = SystemColors.Control;
             dgvRankingVinos.BorderStyle = BorderStyle.None;
             dgvRankingVinos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRankingVinos.Columns.AddRange(new DataGridViewColumn[] { rank, nombre, calificacion_sommelier, calificacion_general, precio_sugerido, bodega, varietal, region, pais });
-            dgvRankingVinos.Location = new Point(43, 84);
+            dgvRankingVinos.Columns.AddRange(new DataGridViewColumn[] { nombre, calificacion_sommelier, calificacion_general, precio_sugerido, bodega, varietal, region, pais });
+            dgvRankingVinos.Location = new Point(21, 99);
             dgvRankingVinos.Margin = new Padding(0);
             dgvRankingVinos.Name = "dgvRankingVinos";
             dgvRankingVinos.ReadOnly = true;
@@ -72,18 +71,8 @@
             dgvRankingVinos.RowTemplate.Resizable = DataGridViewTriState.False;
             dgvRankingVinos.ScrollBars = ScrollBars.None;
             dgvRankingVinos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRankingVinos.Size = new Size(1534, 333);
+            dgvRankingVinos.Size = new Size(1468, 333);
             dgvRankingVinos.TabIndex = 5;
-            // 
-            // rank
-            // 
-            rank.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            rank.Frozen = true;
-            rank.HeaderText = "Posición";
-            rank.MinimumWidth = 6;
-            rank.Name = "rank";
-            rank.ReadOnly = true;
-            rank.Width = 125;
             // 
             // nombre
             // 
@@ -171,7 +160,6 @@
 
         private Panel pnlRankingExportGridMove;
         private DataGridView dgvRankingVinos;
-        private DataGridViewTextBoxColumn rank;
         private DataGridViewTextBoxColumn nombre;
         private DataGridViewTextBoxColumn calificacion_sommelier;
         private DataGridViewTextBoxColumn calificacion_general;
