@@ -1,14 +1,26 @@
-﻿using PPAI24.BE;
+﻿using iText.Kernel.Pdf.Canvas.Draw;
+using iText.Kernel.Pdf;
+using iText.Layout.Element;
+using iText.Layout;
+using iText.Layout.Properties;
+using iText.IO.Image;
+using Microsoft.Office.Interop.Excel;
+using PPAI24.BE;
+using SpreadsheetLight;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
+//using DataTable = System.Data.DataTable;
+//using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace PPAI24
 {
@@ -34,6 +46,7 @@ namespace PPAI24
                 MessageBox.Show("El rango de fechas ingresado no es valido");
             else
             {
+                txtBoxFiltros.Text = "Rango de fecha Desde: " + fechaDesde.ToShortDateString() + " Hasta: " + fechaHasta.ToShortDateString();
                 pnlExportRanking.Visible = false;
                 pnlRangoFecha.Visible = false;
                 pnlTipoResenia.Visible = true;
@@ -49,10 +62,19 @@ namespace PPAI24
                 pnlExportRanking.Visible = true;
 
                 if (rbReseniaNormal.Checked || rbReseniaAmigos.Checked)
+                {
                     tipoReseña = false;
-
+                    txtBoxFiltros.Text = "Rango de fecha Desde: " + fechaDesde.ToShortDateString() + " Hasta: " + fechaHasta.ToShortDateString() +
+                        " Tipo de Reseña: Normal/Amigos";
+                }
                 else
+                {
+                    txtBoxFiltros.Text = "Rango de fecha Desde: " + fechaDesde.ToShortDateString() + " Hasta: " + fechaHasta.ToShortDateString() +
+                        " Tipo de Reseña: Sommelier";
+
+
                     tipoReseña = true;
+                }
             }
             else
                 MessageBox.Show("Debe seleccionar un tipo de reseña");
@@ -63,52 +85,56 @@ namespace PPAI24
             if (rbExportExcel.Checked || rbExportPDF.Checked || rbExportGrid.Checked)
             {
                 MessageBox.Show("Confirma la generación del reporte?");
-
+                System.Data.DataTable ranking = controlador.GenerarRankingVinos(tipoReseña, fechaDesde, fechaHasta);
+                Random random = new Random();
                 if (rbExportExcel.Checked)
                 {
-
-                    //Excel.Application excelApp = new Excel.Application();
-                    //excelApp.Visible = true;
-
-                    //Excel.Workbook workbook = excelApp.Workbooks.Add();
-                    //Excel.Worksheet worksheet = (Excel.Worksheet)workbook.ActiveSheet;
-
-                    //worksheet.Cells[1, 1] = "Posición";
-                    //worksheet.Cells[1, 2] = "Nombre";
-                    //worksheet.Cells[1, 3] = "Calificación Sommelier";
-                    //worksheet.Cells[1, 4] = "Calificación General";
-                    //worksheet.Cells[1, 5] = "Precio Sugerido";
-                    //worksheet.Cells[1, 6] = "Bodega";
-                    //worksheet.Cells[1, 7] = "Varietal";
-                    //worksheet.Cells[1, 8] = "Región";
-                    //worksheet.Cells[1, 9] = "País";
-
-                    //int fila = 2;
-                    //var listVinos = new List<Vino>();
-                    //listVinos = GenerarRanking();
-                    //foreach (var vino in listVinos)
-                    //{
-                    //    worksheet.Cells[fila, 1] = vino.Nombre;
-                    //    worksheet.Cells[fila, 2] = vino.CalificacionSommelier;
-                    //    worksheet.Cells[fila, 3] = vino.CalificacionGeneral;
-                    //    worksheet.Cells[fila, 5] = vino.PrecioSugerido;
-                    //    worksheet.Cells[fila, 6] = vino.Bodega;
-                    //    worksheet.Cells[fila, 7] = vino.Varietal;
-                    //    worksheet.Cells[fila, 8] = vino.Region;
-                    //    worksheet.Cells[fila, 9] = vino.Pais;
-                    //    fila++;
-                    //}
-
-                    //// Guardar el archivo de Excel
-                    //workbook.SaveAs("D:\\trikiz\\Descargas\\RankingVino.xlsx");
-                    //workbook.Close();
-                    //excelApp.Quit();
+                    SLDocument sl_export_excel = new SLDocument();
+                    string filePath = "D:\\trikiz\\Descargas\\RankingVino_"+random.Next(1,10000)+".xls";
+                    sl_export_excel.ImportDataTable(1, 1, ranking, true);
+                    sl_export_excel.SaveAs(filePath);
+                    OpenExcelFile(filePath);
+                    
                 }
                 else
                 {
                     if (rbExportPDF.Checked)
                     {
-                        //exportPDF
+                        string filePath = "D:\\trikiz\\Descargas\\RankingVino_" + random.Next(1, 10000) + ".pdf";
+                        //todavia no me anda bien
+                        //using (PdfWriter writer = new PdfWriter(filePath))
+                        //{
+                        //    using (PdfDocument pdf = new PdfDocument(writer))
+                        //    {
+                        //        Document export_pdf = new Document(pdf);
+                                
+                        //        Paragraph nombre = new Paragraph("Ranking de Vinos")
+                        //           .SetTextAlignment(TextAlignment.CENTER)
+                        //           .SetFontSize(20);
+                        //        export_pdf.Add(nombre);
+
+                        //        LineSeparator ls = new LineSeparator(new SolidLine());
+                        //        export_pdf.Add(ls);
+
+                        //        Table dt_ranking = new Table(ranking.Columns.Count);
+
+                        //        foreach (DataColumn column in ranking.Columns)
+                        //        {
+                        //            dt_ranking.AddHeaderCell(new Cell().Add(new Paragraph(column.ColumnName)));
+                        //        }
+
+                        //        foreach (DataRow row in ranking.Rows)
+                        //        {
+                        //            foreach (var cell in row.ItemArray)
+                        //            {
+                        //                dt_ranking.AddCell(new Cell().Add(new Paragraph(cell.ToString())));
+                        //            }
+                        //        }
+
+                        //        export_pdf.Add(dt_ranking);
+                        //        export_pdf.Close();
+                        //    }
+                        //}
                     }
                     else
                     {
@@ -116,7 +142,6 @@ namespace PPAI24
                         //List<object> list = new List<object>();
                         //RankingExportGrid rankingExportGrid = new RankingExportGrid(list);
                         //rankingExportGrid.Show();
-                        DataTable ranking = controlador.GenerarRankingVinos(tipoReseña, fechaDesde, fechaHasta);
                         RankingExportGrid rankingExportGrid = new RankingExportGrid(ranking);
                         rankingExportGrid.Show();
                         //dataGridRanking.Visible = true;
@@ -128,6 +153,62 @@ namespace PPAI24
             else
             {
                 MessageBox.Show("Debe seleccionar un formato para mostrar Ranking");
+            }
+        }
+
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Desea cancelar la generación del Ranking?", "Volver al Menu Principal", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        private void btnVolverAFechas_Click(object sender, EventArgs e)
+        {
+            pnlRangoFecha.Visible = true;
+            pnlTipoResenia.Visible = false;
+            pnlExportRanking.Visible = false;
+        }
+
+        private void btnVolverATipoR_Click(object sender, EventArgs e)
+        {
+            pnlRangoFecha.Visible = false;
+            pnlTipoResenia.Visible = true;
+            pnlExportRanking.Visible = false;
+        }
+
+        public void OpenExcelFile(string filePath)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = filePath,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al abrir el archivo: " + ex.Message);
+            }
+        }
+
+        public void OpenPdfFile(string filePath)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = filePath,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al abrir el archivo: " + ex.Message);
             }
         }
     }

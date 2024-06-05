@@ -38,8 +38,10 @@
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             pnlLoginMove = new Panel();
+            btnCerrarLogin = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pnlLoginMove.SuspendLayout();
             SuspendLayout();
             // 
             // lblUsuario
@@ -125,12 +127,30 @@
             // 
             // pnlLoginMove
             // 
+            pnlLoginMove.Controls.Add(btnCerrarLogin);
             pnlLoginMove.Dock = DockStyle.Top;
             pnlLoginMove.Location = new Point(171, 0);
             pnlLoginMove.Name = "pnlLoginMove";
             pnlLoginMove.Size = new Size(351, 27);
             pnlLoginMove.TabIndex = 7;
             pnlLoginMove.MouseDown += pnlLoginMove_MouseDown;
+            // 
+            // btnCerrarLogin
+            // 
+            btnCerrarLogin.Anchor = AnchorStyles.None;
+            btnCerrarLogin.BackColor = SystemColors.ButtonFace;
+            btnCerrarLogin.FlatAppearance.BorderColor = Color.Black;
+            btnCerrarLogin.FlatAppearance.BorderSize = 0;
+            btnCerrarLogin.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCerrarLogin.ForeColor = Color.Black;
+            btnCerrarLogin.Location = new Point(317, 3);
+            btnCerrarLogin.Margin = new Padding(0);
+            btnCerrarLogin.Name = "btnCerrarLogin";
+            btnCerrarLogin.Size = new Size(26, 24);
+            btnCerrarLogin.TabIndex = 0;
+            btnCerrarLogin.Text = "X";
+            btnCerrarLogin.UseVisualStyleBackColor = false;
+            btnCerrarLogin.Click += btnCerrarLogin_Click;
             // 
             // Login
             // 
@@ -154,6 +174,7 @@
             Text = "Login";
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            pnlLoginMove.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -169,5 +190,6 @@
         private Panel panel1;
         private PictureBox pictureBox1;
         private Panel pnlLoginMove;
+        private Button btnCerrarLogin;
     }
 }

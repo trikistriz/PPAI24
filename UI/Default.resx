@@ -118,6 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnCerrarSesion.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAr5JREFUWEfd
+        Vj2I1EAUXv/QQq200OoQFQURRTsrQcHGThRsrAStLcRGFBRLC0s90U5O5OAshGtWRPTwJpld8dYkk2PX
+        y8wcKHr4A6IuF9/Lvlmzl+wme9kV9INX7Pe+995HMvsypX8CjLE13JdnuKPucqHH+g1bqNuWq06NheEq
+        apkf5Tfv19ueegERFg3LU88c58MGap0PlpA305oViFFqnQ+2J1WrUOtp7902ojsRhitsV14A3a/YoKYl
+        1C3+dn7E8hq74bdo8fpnX08Bir5iIbzL+0QlgLlW81bAo7ZsRx+kdAQ4B5fbeSfYS3Q2KkKehKJRXgt2
+        ENUB7unTscFfmJDn0w5bRaiLbZ2vDxBdHNyTT03jqlDHiU5gaAag4QI1rhKVir4N4H/fdtVV7gZXwjBc
+        SXQC0LAZNRVqnKhU9GUgGu7JR6YA4gilEvij0Q+JSkVuAynDPzJXb6J0AkaHG4+oVOQykDI8rLjqCaVT
+        YXSFDeB7XjqcYhFiEgeYgKVzrzIrd2Kd0RU2wD111AjyBHPVHawzvwsbwPcMycCIMuKbLeQJrDNcYQMI
+        yw+2g0AaYSvkq1672+gGYgCx1AR8x+2MPTBYA4iUJ5G5BwZqAIEm4GDWoGDmr+2B5eD/N2A7c1uh4Bhu
+        SaI6MHQD8L2fjQpddYOoDuQ1wF19yWinhdpPdDagILqSQTC8+xHdhmmaacDT14y26s/tITob3FWPTSEE
+        w0HxMLleBsrl8mrQzJB2cUqIjZTKBrrFu54Z1C26GbDF/Ga8K7S1Qj2nVH6gCSieyDAyQfII9HU9B/yn
+        mKbJfXWIJIMBNDUb8zMsrF3IwcHdB79fEm9iodelddmwXHk9NuRH+18TD6EesFpjC5UMFkKItXDCpxJD
+        o8H6NfPlYZIOD/V6fR3enmFXNGDwdwjG/eAsnn6SdEGp9BuqO0VDhl6J1gAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="ttCerrarSesion.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>214, 18</value>
+  </metadata>
   <data name="btnRanking.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAjBJREFUWEft
@@ -134,7 +154,7 @@
 </value>
   </data>
   <metadata name="ttGenerarRankingVinos.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>12, 12</value>
   </metadata>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

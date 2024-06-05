@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="textBox1.Text" xml:space="preserve">
+  <data name="txtBoxDescripcion.Text" xml:space="preserve">
     <value>Los rankings de Vinos son generados a partir de los distintos tipos de reseñas (normales, sommeliers, amigos)  realizadas por usuarios, y siempre se encuentran dentro de un rango de fecha. 
 Para realizar la búsqueda correspondiente el usuario debera ingresar un rango de fechas válido, un tipo de reseña y el formato para visualizar el reporte.</value>
   </data>

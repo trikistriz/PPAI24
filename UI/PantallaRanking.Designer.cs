@@ -31,9 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaRanking));
             lblTitleRankingVinos = new Label();
             lblRankingInfo = new Label();
-            textBox1 = new TextBox();
+            txtBoxDescripcion = new TextBox();
             btnSelRangoFechas = new Button();
-            lblTipoResenia = new Label();
             rbReseniaNormal = new RadioButton();
             rbReseniaSommelier = new RadioButton();
             rbReseniaAmigos = new RadioButton();
@@ -42,7 +41,10 @@
             lblRangoFechaD = new Label();
             dtpDesde = new DateTimePicker();
             lblRangoFechaH = new Label();
+            btnCancelar = new Button();
             pnlTipoResenia = new Panel();
+            btnVolverAFechas = new Button();
+            gpTipoResenia = new GroupBox();
             btnSelResenia = new Button();
             pnlExportRanking = new Panel();
             bntSelExportRanking = new Button();
@@ -50,13 +52,13 @@
             rbExportPDF = new RadioButton();
             rbExportGrid = new RadioButton();
             rbExportExcel = new RadioButton();
-            lblFormatoReporte = new Label();
-            gpTipoResenia = new GroupBox();
+            txtBoxFiltros = new TextBox();
+            btnVolverATipoR = new Button();
             pnlRangoFecha.SuspendLayout();
             pnlTipoResenia.SuspendLayout();
+            gpTipoResenia.SuspendLayout();
             pnlExportRanking.SuspendLayout();
             gpExportRanking.SuspendLayout();
-            gpTipoResenia.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitleRankingVinos
@@ -77,36 +79,27 @@
             lblRankingInfo.Size = new Size(0, 20);
             lblRankingInfo.TabIndex = 2;
             // 
-            // textBox1
+            // txtBoxDescripcion
             // 
-            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(11, 35);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(516, 125);
-            textBox1.TabIndex = 3;
-            textBox1.Text = resources.GetString("textBox1.Text");
+            txtBoxDescripcion.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxDescripcion.Location = new Point(11, 37);
+            txtBoxDescripcion.Multiline = true;
+            txtBoxDescripcion.Name = "txtBoxDescripcion";
+            txtBoxDescripcion.ReadOnly = true;
+            txtBoxDescripcion.Size = new Size(697, 91);
+            txtBoxDescripcion.TabIndex = 3;
+            txtBoxDescripcion.Text = resources.GetString("txtBoxDescripcion.Text");
             // 
             // btnSelRangoFechas
             // 
             btnSelRangoFechas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnSelRangoFechas.Location = new Point(231, 173);
+            btnSelRangoFechas.Location = new Point(174, 187);
             btnSelRangoFechas.Name = "btnSelRangoFechas";
-            btnSelRangoFechas.Size = new Size(282, 35);
+            btnSelRangoFechas.Size = new Size(320, 30);
             btnSelRangoFechas.TabIndex = 7;
             btnSelRangoFechas.Text = "Seleccionar Rango de Fechas";
             btnSelRangoFechas.UseVisualStyleBackColor = true;
             btnSelRangoFechas.Click += btnSelRangoFechas_Click;
-            // 
-            // lblTipoResenia
-            // 
-            lblTipoResenia.AutoSize = true;
-            lblTipoResenia.Location = new Point(19, 12);
-            lblTipoResenia.Name = "lblTipoResenia";
-            lblTipoResenia.Size = new Size(206, 20);
-            lblTipoResenia.TabIndex = 9;
-            lblTipoResenia.Text = "Seleccione el tipo de Reseña: ";
             // 
             // rbReseniaNormal
             // 
@@ -150,20 +143,20 @@
             pnlRangoFecha.Controls.Add(lblRangoFechaH);
             pnlRangoFecha.Location = new Point(11, 163);
             pnlRangoFecha.Name = "pnlRangoFecha";
-            pnlRangoFecha.Size = new Size(517, 227);
+            pnlRangoFecha.Size = new Size(555, 227);
             pnlRangoFecha.TabIndex = 13;
             // 
             // dtpHasta
             // 
-            dtpHasta.Location = new Point(231, 65);
+            dtpHasta.Location = new Point(131, 81);
             dtpHasta.Name = "dtpHasta";
-            dtpHasta.Size = new Size(276, 27);
+            dtpHasta.Size = new Size(363, 27);
             dtpHasta.TabIndex = 6;
             // 
             // lblRangoFechaD
             // 
             lblRangoFechaD.AutoSize = true;
-            lblRangoFechaD.Location = new Point(43, 17);
+            lblRangoFechaD.Location = new Point(25, 24);
             lblRangoFechaD.Name = "lblRangoFechaD";
             lblRangoFechaD.Size = new Size(100, 20);
             lblRangoFechaD.TabIndex = 1;
@@ -171,37 +164,70 @@
             // 
             // dtpDesde
             // 
-            dtpDesde.Location = new Point(231, 12);
+            dtpDesde.Location = new Point(131, 17);
             dtpDesde.Name = "dtpDesde";
-            dtpDesde.Size = new Size(276, 27);
+            dtpDesde.Size = new Size(363, 27);
             dtpDesde.TabIndex = 4;
             // 
             // lblRangoFechaH
             // 
             lblRangoFechaH.AutoSize = true;
-            lblRangoFechaH.Location = new Point(48, 69);
+            lblRangoFechaH.Location = new Point(25, 88);
             lblRangoFechaH.Name = "lblRangoFechaH";
             lblRangoFechaH.Size = new Size(96, 20);
             lblRangoFechaH.TabIndex = 5;
             lblRangoFechaH.Text = "Fecha Hasta: ";
             // 
+            // btnCancelar
+            // 
+            btnCancelar.Location = new Point(604, 350);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(104, 30);
+            btnCancelar.TabIndex = 8;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // pnlTipoResenia
             // 
+            pnlTipoResenia.Controls.Add(btnVolverAFechas);
             pnlTipoResenia.Controls.Add(gpTipoResenia);
             pnlTipoResenia.Controls.Add(btnSelResenia);
-            pnlTipoResenia.Controls.Add(lblTipoResenia);
             pnlTipoResenia.Location = new Point(11, 163);
             pnlTipoResenia.Name = "pnlTipoResenia";
-            pnlTipoResenia.Size = new Size(517, 227);
+            pnlTipoResenia.Size = new Size(555, 227);
             pnlTipoResenia.TabIndex = 14;
             pnlTipoResenia.Visible = false;
+            // 
+            // btnVolverAFechas
+            // 
+            btnVolverAFechas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnVolverAFechas.Location = new Point(19, 187);
+            btnVolverAFechas.Name = "btnVolverAFechas";
+            btnVolverAFechas.Size = new Size(106, 30);
+            btnVolverAFechas.TabIndex = 15;
+            btnVolverAFechas.Text = "Volver";
+            btnVolverAFechas.UseVisualStyleBackColor = true;
+            btnVolverAFechas.Click += btnVolverAFechas_Click;
+            // 
+            // gpTipoResenia
+            // 
+            gpTipoResenia.Controls.Add(rbReseniaSommelier);
+            gpTipoResenia.Controls.Add(rbReseniaAmigos);
+            gpTipoResenia.Controls.Add(rbReseniaNormal);
+            gpTipoResenia.Location = new Point(19, 17);
+            gpTipoResenia.Name = "gpTipoResenia";
+            gpTipoResenia.Size = new Size(532, 125);
+            gpTipoResenia.TabIndex = 14;
+            gpTipoResenia.TabStop = false;
+            gpTipoResenia.Text = "Seleccione el tipo de Reseña: ";
             // 
             // btnSelResenia
             // 
             btnSelResenia.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnSelResenia.Location = new Point(310, 173);
+            btnSelResenia.Location = new Point(311, 187);
             btnSelResenia.Name = "btnSelResenia";
-            btnSelResenia.Size = new Size(184, 29);
+            btnSelResenia.Size = new Size(222, 30);
             btnSelResenia.TabIndex = 13;
             btnSelResenia.Text = "Seleccionar Reseña";
             btnSelResenia.UseVisualStyleBackColor = true;
@@ -209,21 +235,21 @@
             // 
             // pnlExportRanking
             // 
+            pnlExportRanking.Controls.Add(btnVolverATipoR);
             pnlExportRanking.Controls.Add(bntSelExportRanking);
             pnlExportRanking.Controls.Add(gpExportRanking);
-            pnlExportRanking.Controls.Add(lblFormatoReporte);
             pnlExportRanking.Location = new Point(11, 163);
             pnlExportRanking.Name = "pnlExportRanking";
-            pnlExportRanking.Size = new Size(517, 227);
+            pnlExportRanking.Size = new Size(555, 227);
             pnlExportRanking.TabIndex = 15;
             pnlExportRanking.Visible = false;
             // 
             // bntSelExportRanking
             // 
             bntSelExportRanking.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            bntSelExportRanking.Location = new Point(241, 187);
+            bntSelExportRanking.Location = new Point(223, 187);
             bntSelExportRanking.Name = "bntSelExportRanking";
-            bntSelExportRanking.Size = new Size(272, 29);
+            bntSelExportRanking.Size = new Size(310, 30);
             bntSelExportRanking.TabIndex = 2;
             bntSelExportRanking.Text = "Seleccionar Formato Ranking";
             bntSelExportRanking.UseVisualStyleBackColor = true;
@@ -234,11 +260,12 @@
             gpExportRanking.Controls.Add(rbExportPDF);
             gpExportRanking.Controls.Add(rbExportGrid);
             gpExportRanking.Controls.Add(rbExportExcel);
-            gpExportRanking.Location = new Point(19, 55);
+            gpExportRanking.Location = new Point(19, 12);
             gpExportRanking.Name = "gpExportRanking";
-            gpExportRanking.Size = new Size(250, 125);
+            gpExportRanking.Size = new Size(532, 125);
             gpExportRanking.TabIndex = 1;
             gpExportRanking.TabStop = false;
+            gpExportRanking.Text = "Seleccione en que formato desea Visualizar el reporte: ";
             // 
             // rbExportPDF
             // 
@@ -273,32 +300,35 @@
             rbExportExcel.Text = "Excel";
             rbExportExcel.UseVisualStyleBackColor = true;
             // 
-            // lblFormatoReporte
+            // txtBoxFiltros
             // 
-            lblFormatoReporte.AutoSize = true;
-            lblFormatoReporte.Location = new Point(19, 21);
-            lblFormatoReporte.Name = "lblFormatoReporte";
-            lblFormatoReporte.Size = new Size(373, 20);
-            lblFormatoReporte.TabIndex = 0;
-            lblFormatoReporte.Text = "Seleccione en que formato desea Visualizar el reporte: ";
+            txtBoxFiltros.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxFiltros.Location = new Point(572, 163);
+            txtBoxFiltros.Multiline = true;
+            txtBoxFiltros.Name = "txtBoxFiltros";
+            txtBoxFiltros.ReadOnly = true;
+            txtBoxFiltros.Size = new Size(136, 165);
+            txtBoxFiltros.TabIndex = 16;
             // 
-            // gpTipoResenia
+            // btnVolverATipoR
             // 
-            gpTipoResenia.Controls.Add(rbReseniaSommelier);
-            gpTipoResenia.Controls.Add(rbReseniaAmigos);
-            gpTipoResenia.Controls.Add(rbReseniaNormal);
-            gpTipoResenia.Location = new Point(19, 40);
-            gpTipoResenia.Name = "gpTipoResenia";
-            gpTipoResenia.Size = new Size(250, 125);
-            gpTipoResenia.TabIndex = 14;
-            gpTipoResenia.TabStop = false;
+            btnVolverATipoR.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnVolverATipoR.Location = new Point(19, 187);
+            btnVolverATipoR.Name = "btnVolverATipoR";
+            btnVolverATipoR.Size = new Size(106, 30);
+            btnVolverATipoR.TabIndex = 17;
+            btnVolverATipoR.Text = "Volver";
+            btnVolverATipoR.UseVisualStyleBackColor = true;
+            btnVolverATipoR.Click += btnVolverATipoR_Click;
             // 
-            // RankingVinos
+            // PantallaRanking
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(539, 400);
-            Controls.Add(textBox1);
+            ClientSize = new Size(720, 400);
+            Controls.Add(txtBoxFiltros);
+            Controls.Add(btnCancelar);
+            Controls.Add(txtBoxDescripcion);
             Controls.Add(lblRankingInfo);
             Controls.Add(lblTitleRankingVinos);
             Controls.Add(pnlExportRanking);
@@ -306,18 +336,16 @@
             Controls.Add(pnlRangoFecha);
             FormBorderStyle = FormBorderStyle.None;
             MaximumSize = new Size(720, 400);
-            Name = "RankingVinos";
+            Name = "PantallaRanking";
             Text = "RankingVinos";
             pnlRangoFecha.ResumeLayout(false);
             pnlRangoFecha.PerformLayout();
             pnlTipoResenia.ResumeLayout(false);
-            pnlTipoResenia.PerformLayout();
-            pnlExportRanking.ResumeLayout(false);
-            pnlExportRanking.PerformLayout();
-            gpExportRanking.ResumeLayout(false);
-            gpExportRanking.PerformLayout();
             gpTipoResenia.ResumeLayout(false);
             gpTipoResenia.PerformLayout();
+            pnlExportRanking.ResumeLayout(false);
+            gpExportRanking.ResumeLayout(false);
+            gpExportRanking.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -326,9 +354,8 @@
 
         private Label lblTitleRankingVinos;
         private Label lblRankingInfo;
-        private TextBox textBox1;
+        private TextBox txtBoxDescripcion;
         private Button btnSelRangoFechas;
-        private Label lblTipoResenia;
         private RadioButton rbReseniaNormal;
         private RadioButton rbReseniaSommelier;
         private RadioButton rbReseniaAmigos;
@@ -340,12 +367,15 @@
         private Panel pnlTipoResenia;
         private Button btnSelResenia;
         private Panel pnlExportRanking;
-        private Label lblFormatoReporte;
         private Button bntSelExportRanking;
         private GroupBox gpExportRanking;
         private RadioButton rbExportPDF;
         private RadioButton rbExportGrid;
         private RadioButton rbExportExcel;
         private GroupBox gpTipoResenia;
+        private Button btnCancelar;
+        private TextBox txtBoxFiltros;
+        private Button btnVolverAFechas;
+        private Button btnVolverATipoR;
     }
 }

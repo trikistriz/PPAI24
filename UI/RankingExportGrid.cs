@@ -38,5 +38,10 @@ namespace PPAI24
             //dgvRankingVinos.Rows.Clear();
             dgvRankingVinos.DataSource = ranking;
         }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

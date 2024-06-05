@@ -60,7 +60,7 @@ namespace PPAI24
             {
                 string premium = "N";
                 Usuario user = new Usuario(n_usuario, password, premium);
-                Default def = new Default(user);
+                Default def = new Default(this, user);
                 def.Show();
                 this.Hide();
 
@@ -110,6 +110,12 @@ namespace PPAI24
 
         }
 
+        private void btnCerrarLogin_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            
+        }
+
 
         //DESCOMENTAR PARA USAR DB
         //private bool ValidarUsuario(string usuario, string password)
@@ -155,7 +161,7 @@ namespace PPAI24
         //        cn.Close();
         //    }
 
-            
+
         //}
 
 

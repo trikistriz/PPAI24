@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using PPAI24.BE;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace PPAI24
 {
     public partial class Default : Form
     {
-        public Default(Usuario usuario)
+        private Login _login;
+        public Default(Login log, Usuario usuario)
         {
             InitializeComponent();
+            _login = log;
         }
 
         //para poder desplazar desde panel superior
@@ -40,6 +43,10 @@ namespace PPAI24
                 btnRanking.Text = "";
                 btnRanking.ImageAlign = ContentAlignment.MiddleCenter;
                 btnRanking.Size = new System.Drawing.Size(80, 29);
+                btnCerrarSesion.Text = "";
+                btnCerrarSesion.ImageAlign = ContentAlignment.MiddleCenter;
+                btnCerrarSesion.Size = new System.Drawing.Size(80, 29);
+
             }
             else
             {
@@ -47,12 +54,15 @@ namespace PPAI24
                 btnRanking.Text = "Generar Ranking de Vinos";
                 btnRanking.ImageAlign = ContentAlignment.MiddleLeft;
                 btnRanking.Size = new System.Drawing.Size(252, 29);
+                btnCerrarSesion.Text = "Cerrar Sesion";
+                btnCerrarSesion.ImageAlign = ContentAlignment.MiddleLeft;
+                btnCerrarSesion.Size = new System.Drawing.Size(252, 29);
             }
         }
 
         private void OpenRankingVinosInDefault(object ChildForm)
         {
-            if(this.pnlDefaultContainer.Controls.Count > 0)
+            if (this.pnlDefaultContainer.Controls.Count > 0)
             {
                 this.pnlDefaultContainer.Controls.RemoveAt(0);
             }
@@ -69,6 +79,34 @@ namespace PPAI24
         private void btnRanking_Click(object sender, EventArgs e)
         {
             OpenRankingVinosInDefault(new PantallaRanking());
+            pnlDefaultMenu.Width = 80;
+            btnRanking.Text = "";
+            btnRanking.ImageAlign = ContentAlignment.MiddleCenter;
+            btnRanking.Size = new System.Drawing.Size(80, 29);
+            btnDefaultMenu.Visible = false;
+        }
+
+        private void pbDefaultMenu_Click(object sender, EventArgs e)
+        {
+            if (this.pnlDefaultContainer.Controls.Count > 0)
+            {
+                this.pnlDefaultContainer.Controls.RemoveAt(0);
+            }
+            pnlDefaultContainer.Visible = true;
+            btnDefaultMenu.Visible = true;
+
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Desea Cerrar Sesión y Salir de la Aplicación?", "Cerrar Sesión", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+                _login.Close();
+            }
+
+            
         }
     }
 }

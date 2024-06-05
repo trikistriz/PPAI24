@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Default));
             pnlDefaultMenu = new Panel();
+            btnCerrarSesion = new Button();
             btnRanking = new Button();
             pictureBox1 = new PictureBox();
             pbDefaultMenu = new PictureBox();
@@ -38,6 +39,7 @@
             btnDefaultMenu = new PictureBox();
             pnlDefaultContainer = new Panel();
             ttGenerarRankingVinos = new ToolTip(components);
+            ttCerrarSesion = new ToolTip(components);
             pnlDefaultMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbDefaultMenu).BeginInit();
@@ -48,15 +50,36 @@
             // pnlDefaultMenu
             // 
             pnlDefaultMenu.BackColor = Color.Black;
+            pnlDefaultMenu.Controls.Add(btnCerrarSesion);
             pnlDefaultMenu.Controls.Add(btnRanking);
             pnlDefaultMenu.Controls.Add(pictureBox1);
             pnlDefaultMenu.Controls.Add(pbDefaultMenu);
             pnlDefaultMenu.Dock = DockStyle.Left;
             pnlDefaultMenu.Location = new Point(0, 0);
-            pnlDefaultMenu.Margin = new Padding(3, 2, 3, 2);
             pnlDefaultMenu.Name = "pnlDefaultMenu";
-            pnlDefaultMenu.Size = new Size(228, 338);
+            pnlDefaultMenu.Size = new Size(260, 451);
             pnlDefaultMenu.TabIndex = 2;
+            // 
+            // btnCerrarSesion
+            // 
+            btnCerrarSesion.AccessibleDescription = "Generar Ranking de Vinos";
+            btnCerrarSesion.AccessibleName = "Generar Ranking de Vinos";
+            btnCerrarSesion.FlatAppearance.BorderSize = 0;
+            btnCerrarSesion.FlatAppearance.MouseDownBackColor = Color.Silver;
+            btnCerrarSesion.FlatAppearance.MouseOverBackColor = Color.DarkGray;
+            btnCerrarSesion.FlatStyle = FlatStyle.Flat;
+            btnCerrarSesion.Font = new Font("Segoe UI", 10F);
+            btnCerrarSesion.ForeColor = Color.White;
+            btnCerrarSesion.Image = (Image)resources.GetObject("btnCerrarSesion.Image");
+            btnCerrarSesion.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCerrarSesion.Location = new Point(5, 402);
+            btnCerrarSesion.Name = "btnCerrarSesion";
+            btnCerrarSesion.Size = new Size(251, 49);
+            btnCerrarSesion.TabIndex = 3;
+            btnCerrarSesion.Text = "Cerrar Sesión";
+            ttCerrarSesion.SetToolTip(btnCerrarSesion, "Cerrar Sesión");
+            btnCerrarSesion.UseVisualStyleBackColor = true;
+            btnCerrarSesion.Click += btnCerrarSesion_Click;
             // 
             // btnRanking
             // 
@@ -70,10 +93,9 @@
             btnRanking.ForeColor = Color.White;
             btnRanking.Image = (Image)resources.GetObject("btnRanking.Image");
             btnRanking.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRanking.Location = new Point(4, 75);
-            btnRanking.Margin = new Padding(3, 2, 3, 2);
+            btnRanking.Location = new Point(5, 100);
             btnRanking.Name = "btnRanking";
-            btnRanking.Size = new Size(220, 37);
+            btnRanking.Size = new Size(251, 49);
             btnRanking.TabIndex = 2;
             btnRanking.Text = "Generar Ranking de Vinos";
             btnRanking.TextAlign = ContentAlignment.MiddleRight;
@@ -84,10 +106,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(71, -86);
-            pictureBox1.Margin = new Padding(3, 2, 3, 2);
+            pictureBox1.Location = new Point(81, -115);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(157, 136);
+            pictureBox1.Size = new Size(179, 181);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -95,32 +116,30 @@
             // pbDefaultMenu
             // 
             pbDefaultMenu.Image = (Image)resources.GetObject("pbDefaultMenu.Image");
-            pbDefaultMenu.Location = new Point(-14, -21);
-            pbDefaultMenu.Margin = new Padding(3, 2, 3, 2);
+            pbDefaultMenu.Location = new Point(-16, -28);
             pbDefaultMenu.Name = "pbDefaultMenu";
-            pbDefaultMenu.Size = new Size(100, 86);
+            pbDefaultMenu.Size = new Size(114, 115);
             pbDefaultMenu.SizeMode = PictureBoxSizeMode.Zoom;
             pbDefaultMenu.TabIndex = 0;
             pbDefaultMenu.TabStop = false;
+            pbDefaultMenu.Click += pbDefaultMenu_Click;
             // 
             // pnlDefaultMove
             // 
             pnlDefaultMove.Controls.Add(btnDefaultMenu);
             pnlDefaultMove.Dock = DockStyle.Top;
-            pnlDefaultMove.Location = new Point(228, 0);
-            pnlDefaultMove.Margin = new Padding(3, 2, 3, 2);
+            pnlDefaultMove.Location = new Point(260, 0);
             pnlDefaultMove.Name = "pnlDefaultMove";
-            pnlDefaultMove.Size = new Size(472, 38);
+            pnlDefaultMove.Size = new Size(540, 51);
             pnlDefaultMove.TabIndex = 3;
             pnlDefaultMove.MouseDown += pnlDefaultMove_MouseDown;
             // 
             // btnDefaultMenu
             // 
             btnDefaultMenu.Image = (Image)resources.GetObject("btnDefaultMenu.Image");
-            btnDefaultMenu.Location = new Point(5, 7);
-            btnDefaultMenu.Margin = new Padding(3, 2, 3, 2);
+            btnDefaultMenu.Location = new Point(6, 9);
             btnDefaultMenu.Name = "btnDefaultMenu";
-            btnDefaultMenu.Size = new Size(31, 26);
+            btnDefaultMenu.Size = new Size(35, 35);
             btnDefaultMenu.SizeMode = PictureBoxSizeMode.Zoom;
             btnDefaultMenu.TabIndex = 0;
             btnDefaultMenu.TabStop = false;
@@ -129,25 +148,23 @@
             // pnlDefaultContainer
             // 
             pnlDefaultContainer.Dock = DockStyle.Fill;
-            pnlDefaultContainer.Location = new Point(228, 38);
-            pnlDefaultContainer.Margin = new Padding(3, 2, 3, 2);
+            pnlDefaultContainer.Location = new Point(260, 51);
             pnlDefaultContainer.Name = "pnlDefaultContainer";
-            pnlDefaultContainer.Size = new Size(472, 300);
+            pnlDefaultContainer.Size = new Size(540, 400);
             pnlDefaultContainer.TabIndex = 4;
             // 
             // Default
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 451);
             Controls.Add(pnlDefaultContainer);
             Controls.Add(pnlDefaultMove);
             Controls.Add(pnlDefaultMenu);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Default";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BonVino StartPage";
@@ -169,5 +186,7 @@
         private PictureBox pictureBox1;
         private Button btnRanking;
         private ToolTip ttGenerarRankingVinos;
+        private Button btnCerrarSesion;
+        private ToolTip ttCerrarSesion;
     }
 }
