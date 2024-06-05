@@ -17,7 +17,6 @@ namespace PPAI24
         {
             InitializeComponent();
             CargarRanking(ranking);
-            Refresh();
         }
 
         //para poder desplazar desde panel superior

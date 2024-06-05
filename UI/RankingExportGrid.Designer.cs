@@ -31,6 +31,7 @@
             pnlRankingExportGridMove = new Panel();
             btnCerrar = new Button();
             dgvRankingVinos = new DataGridView();
+            lblTitleRankingVinos = new Label();
             nombre = new DataGridViewTextBoxColumn();
             calificacion_sommelier = new DataGridViewTextBoxColumn();
             precio_sugerido = new DataGridViewTextBoxColumn();
@@ -38,7 +39,6 @@
             varietal = new DataGridViewTextBoxColumn();
             region = new DataGridViewTextBoxColumn();
             pais = new DataGridViewTextBoxColumn();
-            lblTitleRankingVinos = new Label();
             pnlRankingExportGridMove.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRankingVinos).BeginInit();
             SuspendLayout();
@@ -90,6 +90,16 @@
             dgvRankingVinos.Size = new Size(1621, 383);
             dgvRankingVinos.TabIndex = 5;
             // 
+            // lblTitleRankingVinos
+            // 
+            lblTitleRankingVinos.AutoSize = true;
+            lblTitleRankingVinos.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            lblTitleRankingVinos.Location = new Point(0, 29);
+            lblTitleRankingVinos.Name = "lblTitleRankingVinos";
+            lblTitleRankingVinos.Size = new Size(218, 35);
+            lblTitleRankingVinos.TabIndex = 6;
+            lblTitleRankingVinos.Text = "Ranking de Vinos";
+            // 
             // nombre
             // 
             nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -99,6 +109,7 @@
             nombre.MinimumWidth = 6;
             nombre.Name = "nombre";
             nombre.ReadOnly = true;
+            nombre.SortMode = DataGridViewColumnSortMode.NotSortable;
             nombre.Width = 200;
             // 
             // calificacion_sommelier
@@ -116,6 +127,7 @@
             precio_sugerido.MinimumWidth = 6;
             precio_sugerido.Name = "precio_sugerido";
             precio_sugerido.ReadOnly = true;
+            precio_sugerido.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // bodega
             // 
@@ -124,6 +136,7 @@
             bodega.MinimumWidth = 6;
             bodega.Name = "bodega";
             bodega.ReadOnly = true;
+            bodega.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // varietal
             // 
@@ -132,6 +145,7 @@
             varietal.MinimumWidth = 6;
             varietal.Name = "varietal";
             varietal.ReadOnly = true;
+            varietal.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // region
             // 
@@ -140,6 +154,7 @@
             region.MinimumWidth = 6;
             region.Name = "region";
             region.ReadOnly = true;
+            region.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // pais
             // 
@@ -148,16 +163,7 @@
             pais.MinimumWidth = 6;
             pais.Name = "pais";
             pais.ReadOnly = true;
-            // 
-            // lblTitleRankingVinos
-            // 
-            lblTitleRankingVinos.AutoSize = true;
-            lblTitleRankingVinos.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            lblTitleRankingVinos.Location = new Point(0, 29);
-            lblTitleRankingVinos.Name = "lblTitleRankingVinos";
-            lblTitleRankingVinos.Size = new Size(218, 35);
-            lblTitleRankingVinos.TabIndex = 6;
-            lblTitleRankingVinos.Text = "Ranking de Vinos";
+            pais.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // RankingExportGrid
             // 
@@ -182,6 +188,8 @@
 
         private Panel pnlRankingExportGridMove;
         private DataGridView dgvRankingVinos;
+        private Button btnCerrar;
+        private Label lblTitleRankingVinos;
         private DataGridViewTextBoxColumn nombre;
         private DataGridViewTextBoxColumn calificacion_sommelier;
         private DataGridViewTextBoxColumn precio_sugerido;
@@ -189,7 +197,5 @@
         private DataGridViewTextBoxColumn varietal;
         private DataGridViewTextBoxColumn region;
         private DataGridViewTextBoxColumn pais;
-        private Button btnCerrar;
-        private Label lblTitleRankingVinos;
     }
 }

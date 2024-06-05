@@ -1,7 +1,7 @@
 ﻿using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Kernel.Pdf;
-using iText.Layout.Element;
 using iText.Layout;
+using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.IO.Image;
 using Microsoft.Office.Interop.Excel;
@@ -18,8 +18,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using DataTable = System.Data.DataTable;
-//using Excel = Microsoft.Office.Interop.Excel;
 
 
 namespace PPAI24
@@ -84,71 +82,64 @@ namespace PPAI24
         {
             if (rbExportExcel.Checked || rbExportPDF.Checked || rbExportGrid.Checked)
             {
-                MessageBox.Show("Confirma la generación del reporte?");
-                System.Data.DataTable ranking = controlador.GenerarRankingVinos(tipoReseña, fechaDesde, fechaHasta);
-                Random random = new Random();
-                if (rbExportExcel.Checked)
+                DialogResult result = MessageBox.Show("Confirma la generación del reporte seleccionado?", "Generar Reporte", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
                 {
-                    SLDocument sl_export_excel = new SLDocument();
-                    string filePath = "D:\\trikiz\\Descargas\\RankingVino_"+random.Next(1,10000)+".xls";
-                    sl_export_excel.ImportDataTable(1, 1, ranking, true);
-                    sl_export_excel.SaveAs(filePath);
-                    OpenExcelFile(filePath);
-                    
-                }
-                else
-                {
-                    if (rbExportPDF.Checked)
+                    System.Data.DataTable ranking = controlador.GenerarRankingVinos(tipoReseña, fechaDesde, fechaHasta);
+                    Random random = new Random();
+                    if (rbExportExcel.Checked)
                     {
-                        string filePath = "D:\\trikiz\\Descargas\\RankingVino_" + random.Next(1, 10000) + ".pdf";
-                        //todavia no me anda bien
-                        //using (PdfWriter writer = new PdfWriter(filePath))
-                        //{
-                        //    using (PdfDocument pdf = new PdfDocument(writer))
-                        //    {
-                        //        Document export_pdf = new Document(pdf);
-                                
-                        //        Paragraph nombre = new Paragraph("Ranking de Vinos")
-                        //           .SetTextAlignment(TextAlignment.CENTER)
-                        //           .SetFontSize(20);
-                        //        export_pdf.Add(nombre);
-
-                        //        LineSeparator ls = new LineSeparator(new SolidLine());
-                        //        export_pdf.Add(ls);
-
-                        //        Table dt_ranking = new Table(ranking.Columns.Count);
-
-                        //        foreach (DataColumn column in ranking.Columns)
-                        //        {
-                        //            dt_ranking.AddHeaderCell(new Cell().Add(new Paragraph(column.ColumnName)));
-                        //        }
-
-                        //        foreach (DataRow row in ranking.Rows)
-                        //        {
-                        //            foreach (var cell in row.ItemArray)
-                        //            {
-                        //                dt_ranking.AddCell(new Cell().Add(new Paragraph(cell.ToString())));
-                        //            }
-                        //        }
-
-                        //        export_pdf.Add(dt_ranking);
-                        //        export_pdf.Close();
-                        //    }
-                        //}
+                        SLDocument sl_export_excel = new SLDocument();
+                        string filePath = "D:\\trikiz\\Descargas\\RankingVino_"+random.Next(1,10000)+".xls";
+                        sl_export_excel.ImportDataTable(1, 1, ranking, true);
+                        sl_export_excel.SaveAs(filePath);
+                        OpenExcelFile(filePath);
+                    
                     }
                     else
                     {
-                        //exportGrid
-                        //List<object> list = new List<object>();
-                        //RankingExportGrid rankingExportGrid = new RankingExportGrid(list);
-                        //rankingExportGrid.Show();
-                        RankingExportGrid rankingExportGrid = new RankingExportGrid(ranking);
-                        rankingExportGrid.Show();
-                        //dataGridRanking.Visible = true;
-                        //dataGridRanking.DataSource = ranking;
+                        if (rbExportPDF.Checked)
+                        {
+                            string filePath = "D:\\trikiz\\Descargas\\RankingVino_" + random.Next(1, 10000) + ".pdf";
+                            
+                            PdfWriter writer = new PdfWriter(filePath);
+                            PdfDocument pdf = new PdfDocument(writer);
+                            Document doc_export_pdf = new Document(pdf);
 
+                            Paragraph nombre = new Paragraph("Ranking de Vinos").SetTextAlignment(TextAlignment.CENTER).SetFontSize(20);
+                            doc_export_pdf.Add(nombre);
+
+                            LineSeparator ls = new LineSeparator(new SolidLine());
+                            doc_export_pdf.Add(ls);
+
+                            Table dt_ranking = new Table(ranking.Columns.Count);
+
+                            foreach (DataColumn columna in ranking.Columns)
+                            {
+                                dt_ranking.AddHeaderCell(new Cell().Add(new Paragraph(columna.ColumnName)));
+                            }
+
+                            foreach (DataRow fila in ranking.Rows)
+                            {
+                                foreach (var celda in fila.ItemArray)
+                                {
+                                    dt_ranking.AddCell(new Cell().Add(new Paragraph(celda.ToString())));
+                                }
+                            }
+
+                            doc_export_pdf.Add(dt_ranking);
+                            doc_export_pdf.Close();
+                            OpenPdfFile(filePath);
+                        }
+                        else
+                        {
+                            //exportGrid
+                            RankingExportGrid rankingExportGrid = new RankingExportGrid(ranking);
+                            rankingExportGrid.Show();
+                        }
                     }
                 }
+
             }
             else
             {
