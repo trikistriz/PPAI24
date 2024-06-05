@@ -89,7 +89,7 @@ namespace PPAI24.BE
             _varietal = new Varietal();
             _reseñas = new List<Reseña>();
         }
-
+        //patron
         public float calcularPuntajeDeSommelierEnPeriodo(bool premium, DateTime fechaDesde, DateTime fechaHasta)
         {
             float suma = 0;
@@ -146,6 +146,19 @@ namespace PPAI24.BE
         public string obtenerNombreVarietal()
         {
             return _varietal.obtenerNombreVarietal();
+        }
+
+        //este metodo debe devolver una lista de reseñas
+        public bool existenReseñasDelTipoEnPeriodo(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            bool esSommelier = false;
+            foreach(Reseña reseña in _reseñas)
+            {
+                reseña.sosDePeriodo(fechaDesde, fechaHasta);
+                esSommelier = reseña.sosDeSommelier();
+            }
+
+            return esSommelier;
         }
     }
 }

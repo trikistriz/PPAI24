@@ -14,7 +14,7 @@ namespace PPAI24
         private DateTime _fechaReseñaHasta;
         private bool _tipoReseña;
         private List<Vino> _vinos = new List<Vino>();
-        private DataTable _dtRanking= new DataTable();
+        private DataTable _dtRanking = new DataTable();
 
         private void crearVinos()
         {
@@ -23,44 +23,45 @@ namespace PPAI24
                 Vino vino = new Vino();
                 Reseña reseña = new Reseña();
                 vino.AddReseña(reseña);
-                _vinos.Add(vino);
-
+                if (vino.existenReseñasDelTipoEnPeriodo(_fechaReseñaDesde, _fechaReseñaHasta))
+                    _vinos.Add(vino);
             }
         }
-
-
 
         public DataTable GenerarRankingVinos(bool tipoReseña, DateTime fechaReseñaDesde, DateTime fechaReseñaHasta)
         {
             _tipoReseña = tipoReseña;
             _fechaReseñaDesde = fechaReseñaDesde;
             _fechaReseñaHasta = fechaReseñaHasta;
-            crearVinos();
-            DataTable ranking = calcularPuntajeDeSommelierEnPeriodo();
-            ranking = ordenarVinos(ranking);
-            DataTable listaVinos = buscarDatosVinos(ranking);
+
+            if (_vinos.Count() == 0)
+                crearVinos();
+
+            DataTable dtRanking = calcularPuntajeDeSommelierEnPeriodo();
+            dtRanking = ordenarVinos(dtRanking);
+            DataTable listaVinos = buscarVinosConReseñasEnRanking(dtRanking);
             return listaVinos;
         }
 
         private DataTable calcularPuntajeDeSommelierEnPeriodo()
         {
-            DataTable ranking = new DataTable();
-            ranking.Columns.Add("Vino");
-            ranking.Columns.Add("Promedio");
+            DataTable dtRankingVinos = new DataTable();
+            dtRankingVinos.Columns.Add("Vino");
+            dtRankingVinos.Columns.Add("Promedio");
 
             foreach (Vino vino in _vinos)
             {
                 float promedio = vino.calcularPuntajeDeSommelierEnPeriodo(_tipoReseña, _fechaReseñaDesde, _fechaReseñaHasta);
 
-                DataRow row = ranking.NewRow();
+                DataRow row = dtRankingVinos.NewRow();
                 row["Vino"] = vino.GetNombre();
                 row["Promedio"] = promedio;
-                ranking.Rows.Add(row);
+                dtRankingVinos.Rows.Add(row);
             }
 
-            return ranking;
+            return dtRankingVinos;
         }
-        private DataTable buscarDatosVinos(DataTable dt)
+        private DataTable buscarVinosConReseñasEnRanking(DataTable dt)
         {
             if (!_dtRanking.Columns.Contains("nombre")) _dtRanking.Columns.Add("nombre");
             if (!_dtRanking.Columns.Contains("calificacion_sommelier")) _dtRanking.Columns.Add("calificacion_sommelier");
@@ -83,11 +84,12 @@ namespace PPAI24
                 newRow["varietal"] = vino.obtenerNombreVarietal();
                 newRow["region"] = infoBodega[1];
                 newRow["pais"] = infoBodega[2];
-                
+
 
                 _dtRanking.Rows.Add(newRow);
             }
-            return _dtRanking;
+            _dtRanking.DefaultView.Sort = "calificacion_sommelier DESC";
+            return _dtRanking.DefaultView.ToTable();
         }
 
         private DataTable ordenarVinos(DataTable dt)
