@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using PPAI24.Data;
 
 namespace PPAI24.BE
 {
-    public class RegionVinicola
+    public class TipoReseña
     {
-        private string _nombre { get; set; }
-        public RegionVinicola()
+        public string _nombre { get; set; }
+
+        public TipoReseña()
         {
             _nombre = "";
         }
-
         #region Getters and Setters
         public string GetNombre()
         {
@@ -26,12 +24,5 @@ namespace PPAI24.BE
             _nombre = nombre;
         }
         #endregion
-
-        public string ObtenerNombrePais(string nombre)
-        {
-            ProvinciaBD pd = new ProvinciaBD();
-            Provincia p = pd.GetProvinciaByRegion(nombre);
-            return p.GetPais();
-        }
     }
 }

@@ -4,6 +4,8 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using PPAI24.Data;
 
 namespace PPAI24.BE
 {
@@ -41,10 +43,16 @@ namespace PPAI24.BE
         }
         #endregion
 
-        public string ObtenerNombrePais()
+        //public string ObtenerNombrePais()
+        //{
+        //    Pais pais = new Pais();
+        //    return pais.ObtenerNombrePais();
+        //}
+        public string GetPais()
         {
-            Pais pais = new Pais();
-            return pais.ObtenerNombrePais();
+            PaisBD paisBD = new PaisBD();
+            Pais pais = paisBD.GetPaisByProvincia(_nombre);
+            return pais.GetNombre();
         }
     }
 }

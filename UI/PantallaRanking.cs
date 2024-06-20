@@ -85,7 +85,7 @@ namespace PPAI24
                 DialogResult result = MessageBox.Show("Confirma la generación del reporte seleccionado?", "Generar Reporte", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.OK)
                 {
-                    System.Data.DataTable ranking = controlador.GenerarRankingVinos(tipoReseña, fechaDesde, fechaHasta);
+                    System.Data.DataTable ranking = controlador.buscarVinosConReseñasEnPeriodo(tipoReseña, fechaDesde, fechaHasta);
                     Random random = new Random();
                     if (rbExportExcel.Checked)
                     {

@@ -11,19 +11,14 @@ namespace PPAI24.BE
         
         private string _nombre { get; set; }
         private List<Provincia> _provincias { get; set; }
-        private List<String> _nombresDePaises = new List<String>
-        {
-            "Chile",
-            "Argentina",
-            "Uruguay"
-        };
+
         public Pais()
         {
-            _nombre = ObtenerNombrePais();
+            _nombre = "";
         }
         public Pais(List<Provincia> provincias)
         {
-            _nombre = ObtenerNombrePais();
+            _nombre = "";
             _provincias = provincias;
         }
 
@@ -45,13 +40,5 @@ namespace PPAI24.BE
             _provincias = provincias;
         }
         #endregion
-
-        public string ObtenerNombrePais()
-        {
-            Random random = new Random();
-            string nb = _nombresDePaises[random.Next(_nombresDePaises.Count)];
-
-            return nb;
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPAI24.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,24 +16,12 @@ namespace PPAI24.BE
         private string _notaDeCataBodega;
         private float _precioARS;
         private int _añada;
-        
+        private int _id {  get; set; }
 
-        //hardcodeada cosmica
-        private List<String> _nombresDeVinos = new List<string>
-        {
-            "Almaviva",
-            "Catena Zapata Nicolás Catena Zapata",
-            "Viña Cobos Bramare Malbec Marchiori Vineyard",
-            "Lapostolle Clos Apalta",
-            "Bodega Garzón Single Vineyard Petit Verdot",
-            "Viña Ventisquero Grey Carmenere",
-            "Terrazas de los Andes Single Vineyard Las Compuertas Malbec",
-            "Casa Silva Microterroir de los Lingues Carmenere",
-            "Zuccardi Aluvional Paraje Altamira Malbec",
-            "Concha y Toro Don Melchor"
-        };
 
         #region Getters and Setters
+        public int getId() { return _id; }
+        public void setId(int id) { this._id = id; }
         public string GetNombre()
         {
             return _nombre;
@@ -61,7 +50,6 @@ namespace PPAI24.BE
         public string GetVarietal()
         {
             return _varietal.GetDescripcion();
-
         }
         public void SetVarietal(Varietal v)
         {
@@ -83,7 +71,7 @@ namespace PPAI24.BE
 
         public Vino() 
         {
-            _nombre = obtenerNombreVino();
+            _nombre = "";
             _precioARS = obtenerPrecio();
             _bodega = new Bodega();
             _varietal = new Varietal();
@@ -97,7 +85,7 @@ namespace PPAI24.BE
 
             foreach (Reseña reseña in _reseñas)
             {
-                if (reseña.sosDePeriodo(fechaDesde, fechaHasta) && reseña.sosDeSommelier() == premium)
+                if (reseña.sosDePeriodo(fechaDesde, fechaHasta) && reseña.sosDeSommelier(premium))
                 {
                     suma += reseña.GetPuntaje();
                     count++;
@@ -114,16 +102,6 @@ namespace PPAI24.BE
             return suma / count;
         }
 
-        public string obtenerNombreVino() 
-        {
-            Random random = new Random();
-            int index = random.Next(_nombresDeVinos.Count);
-            string nb = _nombresDeVinos[index];
-            _nombresDeVinos.RemoveAt(index);
-
-            return nb;
-        }
-
         public float obtenerPrecio()
         {
             Random random = new Random();
@@ -132,33 +110,30 @@ namespace PPAI24.BE
             float precio = random.Next(minValue, maxValue);
             return precio;
         }
+        //incluir dependencia
         public String[] buscarInfoBodega()
         {
             String[] bodega = new string[3];
+            bodega[0] = _bodega.GetNombre();
             String[] regionYPais = _bodega.ObtenerRegionYPais();
-            bodega[0] = _bodega.ObtenerNombreBodega();
             bodega[1] = regionYPais[0]; //region
             bodega[2] = regionYPais[1]; //pais
 
             return bodega;
         }
 
-        public string obtenerNombreVarietal()
+        public bool tenesReseñasDelTipoEnPeriodo(DateTime fechaDesde, DateTime fechaHasta, bool esSommelier)
         {
-            return _varietal.obtenerNombreVarietal();
-        }
-
-        //este metodo debe devolver una lista de reseñas
-        public bool existenReseñasDelTipoEnPeriodo(DateTime fechaDesde, DateTime fechaHasta)
-        {
-            bool esSommelier = false;
+            //List<Reseña> reseñas = new List<Reseña> ();
             foreach(Reseña reseña in _reseñas)
             {
                 reseña.sosDePeriodo(fechaDesde, fechaHasta);
-                esSommelier = reseña.sosDeSommelier();
+                esSommelier = reseña.sosDeSommelier(esSommelier);
+                if(esSommelier)
+                    return true;
             }
 
-            return esSommelier;
+            return false;
         }
     }
 }

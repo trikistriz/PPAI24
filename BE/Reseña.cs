@@ -12,7 +12,8 @@ namespace PPAI24.BE
         private bool _esPremium { get; set; }
         private DateTime _fechaReseña { get; set; }
         private int _puntaje { get; set; }
-        
+        private int id { get; set; }
+
         public Reseña()
         {
             _fechaReseña = DateTime.Now;
@@ -28,9 +29,13 @@ namespace PPAI24.BE
             _comentario = com;
             _esPremium = premium;
         }
-        public bool sosDeSommelier()
+        public bool sosDeSommelier(bool tipoReseña)
         {
-            return _esPremium;
+            if (tipoReseña)
+                return _esPremium;
+            else
+                return false;
+
         }
         //patron experto
         public bool sosDePeriodo(DateTime fechaDesde, DateTime fechaHasta)
@@ -42,14 +47,17 @@ namespace PPAI24.BE
         {
             Random rnd = new Random();
             int minValue = 0;
-            int maxValue = 11; 
+            int maxValue = 11;
 
             int puntaje = rnd.Next(minValue, maxValue);
-            
+
             return puntaje;
         }
 
         #region Getters and Setters
+
+        public int GetId() { return id; }
+        public void SetId(int id) { this.id = id; }
 
         public DateTime GetFechaReseña()
         {
@@ -63,6 +71,7 @@ namespace PPAI24.BE
         {
             return _comentario;
         }
+
         public void SetFechaReseña(DateTime fecha)
         {
             _fechaReseña = fecha;

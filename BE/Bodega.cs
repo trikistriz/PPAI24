@@ -11,21 +11,6 @@ namespace PPAI24.BE
         private string _nombre { get; set; }
         private RegionVinicola _regionVinicola { get; set; }
 
-        //harcodeada cosmica
-        private List<string> _nombresDeBodegas = new List<string>
-        {
-            "Viña Almaviva",
-            "Bodega Catena Zapata",
-            "Viña Cobos",
-            "Viña Lapostolle",
-            "Bodega Garzón",
-            "Viña Ventisquero",
-            "Terrazas de los Andes",
-            "Casa Silva",
-            "Zuccardi",
-            "Viña Concha y Toro"
-        };
-
         #region Getters and Setters
 
         //getters y setters
@@ -49,25 +34,18 @@ namespace PPAI24.BE
 
         public Bodega()
         {
-            _nombre = ObtenerNombreBodega();
+            _nombre = "";
             _regionVinicola = new RegionVinicola();
         }
 
         public String[] ObtenerRegionYPais()
         {
             String[] region = new String[2];
-            region[0] = _regionVinicola.ObtenerNombreRegion();
-            region[1] = _regionVinicola.ObtenerNombrePais();
+            region[0] = _regionVinicola.GetNombre();
+            region[1] = _regionVinicola.ObtenerNombrePais(region[0]);
 
             return region;
         }
 
-        public string ObtenerNombreBodega()
-        {
-            Random random = new Random();
-            string nb = _nombresDeBodegas[random.Next(_nombresDeBodegas.Count)];
-
-            return nb;
-        }
     }
 }
