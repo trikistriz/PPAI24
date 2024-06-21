@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace PPAI24.Data
 {
@@ -25,7 +26,8 @@ namespace PPAI24.Data
             //cadenaConexion = @"";
 
             //Pedro
-            cadenaConexion = @"DESKTOP-TT0P9UL;Initial Catalog=PPAI_2024_BON_VINO;Integrated Security=True;Encrypt=False";
+            //cadenaConexion = @"DESKTOP-TT0P9UL;Initial Catalog=PPAI_2024_BON_VINO;Integrated Security=True;Encrypt=False";
+            cadenaConexion = @"data source=DESKTOP-TT0P9UL;initial catalog=PPAI_2024_BON_VINO;trusted_connection=true";
         }
 
         enum ResultadoTransaccion

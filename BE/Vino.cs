@@ -72,7 +72,7 @@ namespace PPAI24.BE
         public Vino() 
         {
             _nombre = "";
-            _precioARS = obtenerPrecio();
+            _precioARS = (float)0;
             _bodega = new Bodega();
             _varietal = new Varietal();
             _reseñas = new List<Reseña>();
@@ -102,14 +102,7 @@ namespace PPAI24.BE
             return suma / count;
         }
 
-        public float obtenerPrecio()
-        {
-            Random random = new Random();
-            int minValue = 2000;
-            int maxValue = 10000;
-            float precio = random.Next(minValue, maxValue);
-            return precio;
-        }
+        
         //incluir dependencia
         public String[] buscarInfoBodega()
         {

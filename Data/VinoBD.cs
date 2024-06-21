@@ -41,24 +41,21 @@ namespace PPAI24.Data
         }
         private Vino nuevoVino(DataRow row)
         {
-            Vino v = new Vino();
-            v.setId((int)row["id_vino"]);
-            v.SetNombre(row["nombre"].ToString());      // Nombre
-            v.SetPrecio((float)row["precio"]);        // Precio
-
-            // Varietal
+            Vino vino = new Vino();
+            vino.setId((int)row["id_vino"]);
+            vino.SetNombre(row["nombre"].ToString());      // Nombre
+            vino.SetPrecio(Convert.ToSingle(row["precio"]));        // Precio
+           
             VarietalBD vd = new VarietalBD();
-            v.SetVarietal(vd.GetVarietalById(int.Parse(row["id_varietal"].ToString())));
-
-            // Bodega
+            vino.SetVarietal(vd.GetVarietalById(int.Parse(row["id_varietal"].ToString())));
+           
             BodegaBD bd = new BodegaBD();
-            v.SetBodega(bd.GetBodegaById(int.Parse(row["id_bodega"].ToString())));
+            vino.SetBodega(bd.GetBodegaById(int.Parse(row["id_bodega"].ToString())));
 
-            // Reseñas
             ReseñaBD reseñaBD = new ReseñaBD();
-            List<Reseña> reseñas = reseñaBD.GetAllReseñaByVino(v.getId());
-            v.SetReseñas(reseñas);
-            return v;
+            List<Reseña> reseñas = reseñaBD.GetAllReseñaByVino(vino.getId());
+            vino.SetReseñas(reseñas);
+            return vino;
         }
     }
 }

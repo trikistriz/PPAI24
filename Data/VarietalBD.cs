@@ -13,8 +13,8 @@ namespace PPAI24.Data
         public Varietal GetVarietalById(int id)
         {
             Varietal v = new Varietal();
-            string consutla = "select * from varietal v left join tipouva t on t.idTipoUva=v.idTipoUva where idVarietal=" + id;
-            DataTable dt = BDHelper.ObtenerInstancia().Consultar(consutla);
+            string consulta = "select * from varietal v left join tipo_uva t on t.id_Tipo_Uva=v.id_Tipo_Uva where id_Varietal=" + id;
+            DataTable dt = BDHelper.ObtenerInstancia().Consultar(consulta);
             if (dt.Rows.Count > 0)
             {
                 // el varietal tiene el mismo nombre que la uva, lo que cambia es el porcentaje 
