@@ -101,7 +101,6 @@ namespace PPAI24.BE
         {
             return suma / count;
         }
-
         
         //incluir dependencia
         public String[] buscarInfoBodega()
@@ -117,7 +116,6 @@ namespace PPAI24.BE
 
         public bool tenesReseñasDelTipoEnPeriodo(DateTime fechaDesde, DateTime fechaHasta, bool esSommelier)
         {
-            //List<Reseña> reseñas = new List<Reseña> ();
             foreach(Reseña reseña in _reseñas)
             {
                 reseña.sosDePeriodo(fechaDesde, fechaHasta);

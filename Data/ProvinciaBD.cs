@@ -14,7 +14,7 @@ namespace PPAI24.Data
         {
             RegionVinicolaBD rv = new RegionVinicolaBD();
             List<Provincia> p = new List<Provincia>();
-            string consulta = $"select * from provincia where ID_PAIS = '{idPais}'";
+            string consulta = $"select * from provincia p join PROVINCIAXPAIS pp on p.ID_PROVINCIA=pp.ID_PROVINCIA where pp.ID_PAIS = '{idPais}'";
             DataTable dt = BDHelper.ObtenerInstancia().Consultar(consulta);
             foreach (DataRow item in dt.Rows)
             {

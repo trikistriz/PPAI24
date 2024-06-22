@@ -13,7 +13,7 @@ namespace PPAI24.Data
         public List<RegionVinicola> GetRegionesVinicolasPorProvincia(int idProv)
         {
             List<RegionVinicola> rv = new List<RegionVinicola>();
-            string consulta = "select * from region where idProvincia=" + idProv;
+            string consulta = "select * from region r join REGIONXPROVINCIA rp on r.ID_REGION=rp.ID_REGION where rp.id_Provincia=" + idProv;
             DataTable dt = BDHelper.ObtenerInstancia().Consultar(consulta);
             foreach (DataRow item in dt.Rows)
             {

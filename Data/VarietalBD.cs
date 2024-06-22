@@ -21,7 +21,7 @@ namespace PPAI24.Data
                 TipoUva tu = new TipoUva();
                 tu.SetNombre(dt.Rows[0]["nombre"].ToString());
                 v.SetTipoUva(tu);
-                v.SetPorcentajeComposicion((int)dt.Rows[0]["porcentajeComposicion"]);
+                v.SetPorcentajeComposicion((int)dt.Rows[0]["porcentaje_composicion"]);
                 v.SetNombre(dt.Rows[0]["nombre"].ToString());
             }
             return v;

@@ -30,9 +30,7 @@ namespace PPAI24.Data
         public Bodega GetBodegaById(int id)
         {
             Bodega b = new Bodega();
-            string consulta = "SELECT b.nombre, r.nombre AS region FROM bodega b " +
-                  "LEFT JOIN regionvinicola r ON r.idRegionVinicola = b.idRegionVinicola " +
-                  "WHERE b.idBodega = " + id;
+            string consulta = "SELECT b.nombre, r.nombre AS region FROM bodega b LEFT JOIN region r ON r.id_Region = b.id_Region WHERE b.id_Bodega = " + id;
             DataTable dt = BDHelper.ObtenerInstancia().Consultar(consulta);
             if (dt.Rows.Count > 0)
             {

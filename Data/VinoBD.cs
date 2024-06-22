@@ -27,7 +27,7 @@ namespace PPAI24.Data
         public List<Vino> GetAll()
         {
             List<Vino> l = new List<Vino>();
-            string consulta = "select * from vino";
+            string consulta = "select v.ID_VINO,v.NOMBRE,v.ID_BODEGA,v.PRECIO, vv.ID_VARIETAL from vino v join VARIETALXVINO vv on v.ID_VINO = vv.ID_VINO";
             DataTable dt = BDHelper.ObtenerInstancia().Consultar(consulta);
             if (dt.Rows.Count > 0)
             {

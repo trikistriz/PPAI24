@@ -13,7 +13,6 @@ namespace PPAI24.BE
 
         #region Getters and Setters
 
-        //getters y setters
         public string GetNombre()
         {
             return _nombre;
