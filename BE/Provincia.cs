@@ -43,11 +43,6 @@ namespace PPAI24.BE
         }
         #endregion
 
-        //public string ObtenerNombrePais()
-        //{
-        //    Pais pais = new Pais();
-        //    return pais.ObtenerNombrePais();
-        //}
         public string GetPais()
         {
             PaisBD paisBD = new PaisBD();
