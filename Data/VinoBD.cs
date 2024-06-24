@@ -43,8 +43,8 @@ namespace PPAI24.Data
         {
             Vino vino = new Vino();
             vino.setId((int)row["id_vino"]);
-            vino.SetNombre(row["nombre"].ToString());      // Nombre
-            vino.SetPrecio(Convert.ToSingle(row["precio"]));        // Precio
+            vino.SetNombre(row["nombre"].ToString());      
+            vino.SetPrecio(Convert.ToSingle(row["precio"]));       
            
             VarietalBD vd = new VarietalBD();
             vino.SetVarietal(vd.GetVarietalById(int.Parse(row["id_varietal"].ToString())));
