@@ -90,7 +90,7 @@ namespace PPAI24
                     if (rbExportExcel.Checked)
                     {
                         SLDocument sl_export_excel = new SLDocument();
-                        string filePath = "D:\\trikiz\\Descargas\\RankingVino_"+random.Next(1,10000)+".xls";
+                        string filePath = "C:\\Users\\Pecres\\Desktop\\RankingVino_" + random.Next(1,10000)+".xls";
                         sl_export_excel.ImportDataTable(1, 1, ranking, true);
                         sl_export_excel.SaveAs(filePath);
                         OpenExcelFile(filePath);
@@ -100,7 +100,7 @@ namespace PPAI24
                     {
                         if (rbExportPDF.Checked)
                         {
-                            string filePath = "D:\\trikiz\\Descargas\\RankingVino_" + random.Next(1, 10000) + ".pdf";
+                            string filePath = "C:\\Users\\Pecres\\Desktop\\RankingVino_" + random.Next(1, 10000) + ".pdf";
                             
                             PdfWriter writer = new PdfWriter(filePath);
                             PdfDocument pdf = new PdfDocument(writer);

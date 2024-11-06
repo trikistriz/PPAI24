@@ -14,7 +14,7 @@ namespace PPAI24
         private DateTime _fechaReseñaDesde;
         private DateTime _fechaReseñaHasta;
         private bool _tipoReseña;
-        private List<Vino> _vinos = new List<Vino>();
+        private AgregadoConcreto<Vino> _vinos = new AgregadoConcreto<Vino>();
         private DataTable _dtRanking = new DataTable();
 
         public DataTable buscarVinosConReseñasEnPeriodo(bool tipoReseña, DateTime fechaReseñaDesde, DateTime fechaReseñaHasta)
@@ -24,7 +24,12 @@ namespace PPAI24
             _fechaReseñaHasta = fechaReseñaHasta;
 
             VinoBD vinoBD = new VinoBD();
-            _vinos = vinoBD.GetAll();
+            List<Vino> listaVinos = vinoBD.GetAll();
+
+            foreach (var vino in listaVinos)
+            {
+                _vinos.AgregarItem(vino);
+            }
 
             if (!_dtRanking.Columns.Contains("nombre")) _dtRanking.Columns.Add("nombre");
             if (!_dtRanking.Columns.Contains("calificacion_sommelier")) _dtRanking.Columns.Add("calificacion_sommelier");
@@ -34,11 +39,16 @@ namespace PPAI24
             if (!_dtRanking.Columns.Contains("region")) _dtRanking.Columns.Add("region");
             if (!_dtRanking.Columns.Contains("pais")) _dtRanking.Columns.Add("pais");
 
-            foreach (Vino vino in _vinos)
+            IIterador<Vino> iteradorVinos = _vinos.CrearIterador();
+
+            iteradorVinos.Primero();
+
+            while (!iteradorVinos.HaTerminado())
             {
+                Vino vino = iteradorVinos.ElementoActual();
+
                 if (vino.tenesReseñasDelTipoEnPeriodo(_fechaReseñaDesde, _fechaReseñaHasta, _tipoReseña))
                 {
-
                     DataRow newRow = _dtRanking.NewRow();
                     newRow["nombre"] = vino.GetNombre();
                     newRow["precio_sugerido"] = vino.GetPrecio();
@@ -50,12 +60,15 @@ namespace PPAI24
                     newRow["calificacion_sommelier"] = calcularPuntajeDeSommelierEnPeriodo(vino);
                     _dtRanking.Rows.Add(newRow);
                 }
+
+                iteradorVinos.Siguiente();
             }
+
             ordenarVinos(_dtRanking);
             return _dtRanking;
         }
 
-
+         
         private float calcularPuntajeDeSommelierEnPeriodo(Vino vino)
         {
             float promedio = vino.calcularPuntajeDeSommelierEnPeriodo(_tipoReseña, _fechaReseñaDesde, _fechaReseñaHasta);

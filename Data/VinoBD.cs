@@ -54,7 +54,10 @@ namespace PPAI24.Data
 
             ReseñaBD reseñaBD = new ReseñaBD();
             List<Reseña> reseñas = reseñaBD.GetAllReseñaByVino(vino.getId());
-            vino.SetReseñas(reseñas);
+            foreach (Reseña reseña in reseñas)
+            {
+                vino.AddReseña(reseña);
+            }
             return vino;
         }
     }
