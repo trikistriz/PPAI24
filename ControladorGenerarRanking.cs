@@ -64,8 +64,7 @@ namespace PPAI24
                 iteradorVinos.Siguiente();
             }
 
-            ordenarVinos(_dtRanking);
-            return _dtRanking;
+            return ordenarVinos(_dtRanking);
         }
 
          
@@ -77,8 +76,10 @@ namespace PPAI24
         
         private DataTable ordenarVinos(DataTable dt)
         {
+            DataTable dtOrdenado = new DataTable();
             dt.DefaultView.Sort = "calificacion_sommelier DESC";
-            return dt.DefaultView.ToTable();
+            dtOrdenado = dt.DefaultView.ToTable();
+            return dtOrdenado;
         }
 
         public bool validarFechasDeReseñas(DateTime fechaDesde, DateTime fechaHasta)
