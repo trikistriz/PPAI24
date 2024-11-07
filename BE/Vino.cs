@@ -11,13 +11,13 @@ namespace PPAI24.BE
     {
         private Bodega _bodega { get; set; }
         private Varietal _varietal { get; set; }
-        private AgregadoConcreto<Reseña> _reseñas { get; set; }
+        private List<Reseña> _reseñas { get; set; }
         private string _nombre;
         private string _notaDeCataBodega;
         private float _precioARS;
         private int _añada;
         private int _id {  get; set; }
-
+        private List<Object> _filtros = new List<object>();
 
         #region Getters and Setters
         public int getId() { return _id; }
@@ -55,13 +55,17 @@ namespace PPAI24.BE
         {
             _varietal = v;
         }
-        
+        #endregion
+
+        public IIterador<Reseña> CrearIterador()
+        {
+            return new IteradorReseñas(_reseñas, _filtros);
+        }
+
         public void AddReseña(Reseña res)
         {
-            _reseñas.AgregarItem(res);
+            _reseñas.Add(res);
         }
-        public IIterador<Reseña> GetIteradorReseñas() => _reseñas.CrearIterador();
-        #endregion
 
         public Vino() 
         {
@@ -69,26 +73,32 @@ namespace PPAI24.BE
             _precioARS = (float)0;
             _bodega = new Bodega();
             _varietal = new Varietal();
-            _reseñas = new AgregadoConcreto<Reseña>();
+            _reseñas = new List<Reseña>();
         }
 
         public float calcularPuntajeDeSommelierEnPeriodo(bool premium, DateTime fechaDesde, DateTime fechaHasta)
         {
+            _filtros.Add(fechaDesde);
+            _filtros.Add(fechaHasta);
+            _filtros.Add(premium);
+
             float suma = 0;
             int count = 0;
 
-            IIterador<Reseña> iteradorPuntaje = GetIteradorReseñas();
+            IIterador<Reseña> iteradorPuntaje = CrearIterador();
 
             iteradorPuntaje.Primero();
 
             while (!iteradorPuntaje.HaTerminado())
             {
                 Reseña reseña = iteradorPuntaje.ElementoActual();
-
-                if (reseña.sosDePeriodo(fechaDesde, fechaHasta) && reseña.sosDeSommelier(premium))
+                if (reseña != null )
                 {
-                    suma += reseña.GetPuntaje();
-                    count++;
+                    if (reseña.sosDePeriodo(fechaDesde, fechaHasta) && reseña.sosDeSommelier(premium))
+                    {
+                        suma += reseña.GetPuntaje();
+                        count++;
+                    }
                 }
                 iteradorPuntaje.Siguiente();
             }
@@ -114,18 +124,25 @@ namespace PPAI24.BE
 
         public bool tenesReseñasDelTipoEnPeriodo(DateTime fechaDesde, DateTime fechaHasta, bool esSommelier)
         {
-            IIterador<Reseña> iteradorReseñas = GetIteradorReseñas();
+            _filtros.Add(fechaDesde);
+            _filtros.Add(fechaHasta);
+            _filtros.Add(esSommelier);
+
+            IIterador<Reseña> iteradorReseñas = CrearIterador();
 
             iteradorReseñas.Primero();
             
             while (!iteradorReseñas.HaTerminado())
             {
                 Reseña reseña = iteradorReseñas.ElementoActual();
-                if (reseña.sosDePeriodo(fechaDesde, fechaHasta) && reseña.sosDeSommelier(esSommelier))
+                if (reseña != null)
                 {
-                    return true;
+                    if (reseña.sosDePeriodo(fechaDesde, fechaHasta) && reseña.sosDeSommelier(esSommelier))
+                    {
+                        return true;
+                    }
                 }
-                iteradorReseñas.Siguiente(); //itera hasta que encuentra una reseña que sea del periodo actual, sino devuelve false
+                iteradorReseñas.Siguiente();
             }
             return false;
         }

@@ -14,21 +14,34 @@ namespace PPAI24
         private DateTime _fechaReseñaDesde;
         private DateTime _fechaReseñaHasta;
         private bool _tipoReseña;
-        private AgregadoConcreto<Vino> _vinos = new AgregadoConcreto<Vino>();
+        private List<Vino> _vinos = new List<Vino>();
         private DataTable _dtRanking = new DataTable();
+        private List<Object> _filtros = new List<object>();
+        public void AgregarElemento(Vino vino)
+        {
+            _vinos.Add(vino);
+        }
+
+        public IIterador<Vino> CrearIterador()
+        {
+            return new IteradorVinos(_vinos,_filtros);
+        }
 
         public DataTable buscarVinosConReseñasEnPeriodo(bool tipoReseña, DateTime fechaReseñaDesde, DateTime fechaReseñaHasta)
         {
             _tipoReseña = tipoReseña;
             _fechaReseñaDesde = fechaReseñaDesde;
             _fechaReseñaHasta = fechaReseñaHasta;
+            _filtros.Add(fechaReseñaDesde);
+            _filtros.Add(fechaReseñaHasta);
+            _filtros.Add(tipoReseña);
 
             VinoBD vinoBD = new VinoBD();
             List<Vino> listaVinos = vinoBD.GetAll();
 
             foreach (var vino in listaVinos)
             {
-                _vinos.AgregarItem(vino);
+                AgregarElemento(vino);
             }
 
             if (!_dtRanking.Columns.Contains("nombre")) _dtRanking.Columns.Add("nombre");
@@ -39,20 +52,20 @@ namespace PPAI24
             if (!_dtRanking.Columns.Contains("region")) _dtRanking.Columns.Add("region");
             if (!_dtRanking.Columns.Contains("pais")) _dtRanking.Columns.Add("pais");
 
-            IIterador<Vino> iteradorVinos = _vinos.CrearIterador();
+            IIterador<Vino> iteradorVinos = CrearIterador();
 
             iteradorVinos.Primero();
 
             while (!iteradorVinos.HaTerminado())
             {
-                Vino vino = iteradorVinos.ElementoActual();
-
-                if (vino.tenesReseñasDelTipoEnPeriodo(_fechaReseñaDesde, _fechaReseñaHasta, _tipoReseña))
+                if (iteradorVinos.ElementoActual() != null)
                 {
+                    Vino vino = iteradorVinos.ElementoActual();
+
                     DataRow newRow = _dtRanking.NewRow();
                     newRow["nombre"] = vino.GetNombre();
                     newRow["precio_sugerido"] = vino.GetPrecio();
-                    String[] infoBodega = vino.buscarInfoBodega();
+                    string[] infoBodega = vino.buscarInfoBodega();
                     newRow["bodega"] = infoBodega[0];
                     newRow["varietal"] = vino.GetVarietal();
                     newRow["region"] = infoBodega[1];
@@ -60,7 +73,6 @@ namespace PPAI24
                     newRow["calificacion_sommelier"] = calcularPuntajeDeSommelierEnPeriodo(vino);
                     _dtRanking.Rows.Add(newRow);
                 }
-
                 iteradorVinos.Siguiente();
             }
 
